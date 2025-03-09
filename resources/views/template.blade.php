@@ -110,33 +110,23 @@
             <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
-                <div class="badge bg-primary rounded-pill ms-auto">5</div>
+                <div data-i18n="Dashboards">Tableau de bord</div>
+                <div class="badge bg-primary rounded-pill ms-auto">3</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item active">
                   <a href="index.html" class="menu-link">
-                    <div data-i18n="Analytics">Analytics</div>
+                    <div data-i18n="#">#</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
-                    <div data-i18n="CRM">CRM</div>
+                    <div data-i18n="#">#</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="app-ecommerce-dashboard.html" class="menu-link">
-                    <div data-i18n="eCommerce">eCommerce</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="app-logistics-dashboard.html" class="menu-link">
-                    <div data-i18n="Logistics">Logistics</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="app-academy-dashboard.html" class="menu-link">
-                    <div data-i18n="Academy">Academy</div>
+                    <div data-i18n="#">#</div>
                   </a>
                 </li>
               </ul>
@@ -146,53 +136,18 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Layouts">Layouts</div>
+                <div data-i18n="Titre">Titre</div>
               </a>
 
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="layouts-collapsed-menu.html" class="menu-link">
-                    <div data-i18n="Collapsed menu">Collapsed menu</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar.html" class="menu-link">
-                    <div data-i18n="Content navbar">Content navbar</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-                    <div data-i18n="Content nav + Sidebar">Content nav + Sidebar</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="../horizontal-menu-template" class="menu-link" target="_blank">
-                    <div data-i18n="Horizontal">Horizontal</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
-                    <div data-i18n="Without menu">Without menu</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-without-navbar.html" class="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
-                    <div data-i18n="Fluid">Fluid</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <div data-i18n="Container">Container</div>
+                    <div data-i18n="content">content</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Blank">Blank</div>
+                    <div data-i18n="content">content</div>
                   </a>
                 </li>
               </ul>
@@ -202,32 +157,17 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-files"></i>
-                <div data-i18n="Front Pages">Front Pages</div>
+                <div data-i18n="Titre">Titre</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="Landing">Landing</div>
+                    <div data-i18n="content">content</div>
                   </a>
-                </li>
-                <li class="menu-item">
-                  <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="Pricing">Pricing</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="../front-pages/payment-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="Payment">Payment</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="../front-pages/checkout-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="Checkout">Checkout</div>
-                  </a>
-                </li>
+                </li> 
                 <li class="menu-item">
                   <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
-                    <div data-i18n="Help Center">Help Center</div>
+                    <div data-i18n="content">content</div>
                   </a>
                 </li>
               </ul>
@@ -253,12 +193,6 @@
               <a href="app-calendar.html" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-calendar"></i>
                 <div data-i18n="Calendar">Calendar</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="app-kanban.html" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
-                <div data-i18n="Kanban">Kanban</div>
               </a>
             </li>
             <!-- e-commerce-app menu start -->
