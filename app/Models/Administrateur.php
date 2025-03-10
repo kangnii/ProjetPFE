@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class Administrateur extends Model
 {
     use HasFactory;
-    protected $fillable = ['email', 'password', 'username', 'firstname', 'surnmame'];
+    protected $fillable = ['email', 'mot_de_passe', 'nom_utilisateur', 'prenom', 'nom'];
     protected $guarded = ['id'];
 }

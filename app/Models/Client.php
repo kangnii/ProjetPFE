@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-    protected $fillable = ['surname', 'firstname', 'email', 'lastname','number'];
+    protected $fillable = ['nom', 'prenom', 'numero','email'];
     protected $guard = ['id'];
+    public function echeances(){
+        return $this->hasMany(Echeance::class);
+    }
 }
