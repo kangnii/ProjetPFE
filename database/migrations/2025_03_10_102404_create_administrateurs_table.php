@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('administrateurs', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->string('password');
-            $table->string('username')->unique();
-            $table->string('firstname');
+            $table->string('mot_de_passe');
+            $table->string('nom_utilisateur')->unique();
+            $table->string('prenom');
+            $table->string('nom');
             $table->rememberToken();
-            $table->string('surname');
             $table->timestamps();
         });
     }
