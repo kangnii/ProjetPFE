@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/accueil', function () {
-    return view('template');
-});
+Route::get('/accueil', [PageController::class,'accueil'])->name('accueil');
