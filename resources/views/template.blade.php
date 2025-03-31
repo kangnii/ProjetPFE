@@ -13,8 +13,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Vuexy - Bootstrap Admin Template</title>
-    
+    <title>Envoi d'échéances</title>
+
 
     <meta name="description" content="" />
 
@@ -68,8 +68,8 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
-            
+            <a href="{{route('accueil')}}" class="app-brand-link">
+
               <span class="app-brand-text demo menu-text fw-bold">Accueil</span>
             </a>
 
@@ -89,291 +89,50 @@
                 <div data-i18n="Dashboards">Tableau de bord</div>
                 <div class="badge bg-primary rounded-pill ms-auto">3</div>
               </a>
-              <ul class="menu-sub">
-                <li class="menu-item active">
-                  <a href="index.html" class="menu-link">
-                    <div data-i18n="#">#</div>
+              <ul class="menu-sub " >
+                <li class="menu-item @yield('messages_sent_activation')">
+                  <a href="{{route('messages_sent')}}" class="menu-link">
+                    <div data-i18n="Messages envoyés">Messages envoyés </div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="dashboards-crm.html" class="menu-link">
-                    <div data-i18n="#">#</div>
+                <li class="menu-item @yield('messages_delivered_activation')" >
+                  <a href="{{route('messages_delivered')}}" class="menu-link">
+                    <div data-i18n="Messages délivrés">Messages délivrés</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="app-ecommerce-dashboard.html" class="menu-link">
-                    <div data-i18n="#">#</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- Customers -->
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-files"></i>
-                <div data-i18n="Customers">Customers</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="List">List</div>
-                  </a>
-                </li> 
-                <li class="menu-item">
-                  <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-                    <div data-i18n="Add">Add</div>
-                  </a>
-                </li> 
-                <li class="menu-item">
-                  <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
-                    <div data-i18n="Modify">Modify</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
-                    <div data-i18n="Delete">Delete</div>
+                <li class="menu-item @yield('failed_sent_activation')" >
+                  <a href="{{route('failed_sent')}}" class="menu-link">
+                    <div data-i18n="Envois échoués">Messages échoués</div>
                   </a>
                 </li>
               </ul>
             </li>
 
-            <!-- Echeances -->
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Echeances">Echeances</div>
+            <!-- Clients -->
+            <li class="menu-item  @yield('client_activation')">
+              <a href="{{route('clients')}}" class="menu-link ">
+                <i class="menu-icon tf-icons ti ti-phone"></i>
+                <div data-i18n="Clients">Clients</div>
               </a>
 
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="layouts-collapsed-menu.html" class="menu-link">
-                    <div data-i18n="List">List</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Add">Add</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Modify">Modify</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Delete">Delete</div>
-                  </a>
-                </li>
-              </ul>
             </li>
 
+            <!-- Suivi des messages -->
+            <li class="menu-item @yield('suivi_messages_activation')">
+              <a href="{{route('suivi_messages')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-eye"></i>
+                <div data-i18n="Suivi des messages">Suivi des messages</div>
+              </a>
+            </li>
 
-            <!-- Apps & Pages -->
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
-            </li>
-            <li class="menu-item">
-              <a href="app-email.html" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mail"></i>
-                <div data-i18n="Email">Email</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-messages"></i>
-                <div data-i18n="Chat">Chat</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="app-calendar.html" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-calendar"></i>
-                <div data-i18n="Calendar">Calendar</div>
-              </a>
-            </li>
-        
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div data-i18n="Roles & Permissions">Roles & Permissions</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="app-access-roles.html" class="menu-link">
-                    <div data-i18n="Roles">Roles</div>
+              <!-- Configuration des modèles de messages -->
+              <li class="menu-item @yield('configuration_messages_activation')">
+                  <a href="{{route('configuration_messages')}}" class="menu-link">
+                      <i class="menu-icon tf-icons ti ti-writing"></i>
+                      <div data-i18n="Configuration des messages">Configuration des messages</div>
                   </a>
-                </li>
-                <li class="menu-item">
-                  <a href="app-access-permission.html" class="menu-link">
-                    <div data-i18n="Permission">Permission</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-file"></i>
-                <div data-i18n="Pages">Pages</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="User Profile">User Profile</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="pages-profile-user.html" class="menu-link">
-                        <div data-i18n="Profile">Profile</div>
-                      </a>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Account Settings">Account Settings</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="pages-account-settings-account.html" class="menu-link">
-                        <div data-i18n="Account">Account</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="pages-account-settings-security.html" class="menu-link">
-                        <div data-i18n="Security">Security</div>
-                      </a>
-                    </li>
-                    
-                    <li class="menu-item">
-                      <a href="pages-account-settings-notifications.html" class="menu-link">
-                        <div data-i18n="Notifications">Notifications</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="pages-account-settings-connections.html" class="menu-link">
-                        <div data-i18n="Connections">Connections</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-             
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-lock"></i>
-                <div data-i18n="Authentications">Authentications</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Login">Login</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-login-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Register">Register</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-register-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-register-multisteps.html" class="menu-link" target="_blank">
-                        <div data-i18n="Multi-steps">Multi-steps</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Verify Email">Verify Email</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-verify-email-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-verify-email-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Reset Password">Reset Password</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-reset-password-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-reset-password-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Forgot Password">Forgot Password</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-forgot-password-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <div data-i18n="Two Steps">Two Steps</div>
-                  </a>
-                  <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="auth-two-steps-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-two-steps-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li> 
+              </li>
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -449,71 +208,71 @@
                 </li>
                 <!-- / Style Switcher-->
 
-                <!-- Quick links  -->
-                <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
-                    <i class="ti ti-layout-grid-add ti-md"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-end py-0">
-                    <div class="dropdown-menu-header border-bottom">
-                      <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-shortcuts-add text-body"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Add shortcuts"
-                          ><i class="ti ti-sm ti-apps"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="dropdown-shortcuts-list scrollable-container">
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">
-                            <i class="ti ti-calendar fs-4"></i>
-                          </span>
-                          <a href="app-calendar.html" class="stretched-link">Calendar</a>
-                          <small class="text-muted mb-0">echeance</small>
-                        </div>
-                        
-                          <div class="dropdown-shortcuts-item col">
-                            <span class="dropdown-shortcuts-icon rounded-circle mb-2">
-                              <i class="ti ti-users fs-4"></i>
-                            </span>
-                            <a href="app-user-list.html" class="stretched-link">Customers</a>
-                            <small class="text-muted mb-0">Manage Customers</small>
-                        </div>
-                        </div>
-                      
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">
-                            <i class="ti ti-chart-bar fs-4"></i>
-                          </span>
-                          <a href="index.html" class="stretched-link">Dashboard</a>
-                          <small class="text-muted mb-0">User Profile</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">
-                            <i class="ti ti-settings fs-4"></i>
-                          </span>
-                          <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
-                          <small class="text-muted mb-0">Account Settings</small>
-                        </div> 
-                    </div>
-                    
-                  </div>
-                
-                
-                </li>
-                <!-- Quick links -->
+{{--                <!-- Quick links  -->--}}
+{{--                <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">--}}
+{{--                  <a--}}
+{{--                    class="nav-link dropdown-toggle hide-arrow"--}}
+{{--                    href="javascript:void(0);"--}}
+{{--                    data-bs-toggle="dropdown"--}}
+{{--                    data-bs-auto-close="outside"--}}
+{{--                    aria-expanded="false">--}}
+{{--                    <i class="ti ti-layout-grid-add ti-md"></i>--}}
+{{--                  </a>--}}
+{{--                  <div class="dropdown-menu dropdown-menu-end py-0">--}}
+{{--                    <div class="dropdown-menu-header border-bottom">--}}
+{{--                      <div class="dropdown-header d-flex align-items-center py-3">--}}
+{{--                        <h5 class="text-body mb-0 me-auto">Shortcuts</h5>--}}
+{{--                        <a--}}
+{{--                          href="javascript:void(0)"--}}
+{{--                          class="dropdown-shortcuts-add text-body"--}}
+{{--                          data-bs-toggle="tooltip"--}}
+{{--                          data-bs-placement="top"--}}
+{{--                          title="Add shortcuts"--}}
+{{--                          ><i class="ti ti-sm ti-apps"></i--}}
+{{--                        ></a>--}}
+{{--                      </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="dropdown-shortcuts-list scrollable-container">--}}
+{{--                      <div class="row row-bordered overflow-visible g-0">--}}
+{{--                        <div class="dropdown-shortcuts-item col">--}}
+{{--                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">--}}
+{{--                            <i class="ti ti-calendar fs-4"></i>--}}
+{{--                          </span>--}}
+{{--                          <a href="app-calendar.html" class="stretched-link">Calendar</a>--}}
+{{--                          <small class="text-muted mb-0">echeance</small>--}}
+{{--                        </div>--}}
+
+{{--                          <div class="dropdown-shortcuts-item col">--}}
+{{--                            <span class="dropdown-shortcuts-icon rounded-circle mb-2">--}}
+{{--                              <i class="ti ti-users fs-4"></i>--}}
+{{--                            </span>--}}
+{{--                            <a href="app-user-list.html" class="stretched-link">Customers</a>--}}
+{{--                            <small class="text-muted mb-0">Manage Customers</small>--}}
+{{--                        </div>--}}
+{{--                        </div>--}}
+
+{{--                      <div class="row row-bordered overflow-visible g-0">--}}
+{{--                        <div class="dropdown-shortcuts-item col">--}}
+{{--                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">--}}
+{{--                            <i class="ti ti-chart-bar fs-4"></i>--}}
+{{--                          </span>--}}
+{{--                          <a href="index.html" class="stretched-link">Dashboard</a>--}}
+{{--                          <small class="text-muted mb-0">User Profile</small>--}}
+{{--                        </div>--}}
+{{--                        <div class="dropdown-shortcuts-item col">--}}
+{{--                          <span class="dropdown-shortcuts-icon rounded-circle mb-2">--}}
+{{--                            <i class="ti ti-settings fs-4"></i>--}}
+{{--                          </span>--}}
+{{--                          <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>--}}
+{{--                          <small class="text-muted mb-0">Account Settings</small>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                  </div>--}}
+
+
+{{--                </li>--}}
+{{--                <!-- Quick links -->--}}
 
                 <!-- Notification -->
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
@@ -797,8 +556,8 @@
                         <span class="align-middle">Settings</span>
                       </a>
                     </li>
-                    
-                   
+
+
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -833,28 +592,29 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
-          
-                <!-- Projects table -->
-                <div class="col-12 col-xl-8 col-sm-12 order-1 order-lg-2 mb-4 mb-lg-0">
-                  <div class="card">
-                    <div class="card-datatable table-responsive">
-                      <table class="datatables-projects table border-top">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Leader</th>
-                            <th>Team</th>
-                            <th class="w-px-200">Status</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <!--/ Projects table -->
+
+
+{{--                <!-- Projects table -->--}}
+{{--                <div class="col-12 col-xl-8 col-sm-12 order-1 order-lg-2 mb-4 mb-lg-0">--}}
+{{--                  <div class="card">--}}
+{{--                    <div class="card-datatable table-responsive">--}}
+{{--                      <table class="datatables-projects table border-top">--}}
+{{--                        <thead>--}}
+{{--                          <tr>--}}
+{{--                            <th></th>--}}
+{{--                            <th></th>--}}
+{{--                            <th>Name</th>--}}
+{{--                            <th>Leader</th>--}}
+{{--                            <th>Team</th>--}}
+{{--                            <th class="w-px-200">Status</th>--}}
+{{--                            <th>Action</th>--}}
+{{--                          </tr>--}}
+{{--                        </thead>--}}
+{{--                      </table>--}}
+{{--                    </div>--}}
+{{--                  </div>--}}
+{{--                </div>--}}
+{{--                <!--/ Projects table -->--}}
               </div>
             </div>
             <!-- / Content -->
@@ -871,7 +631,7 @@
                     </script>
                     , made by Case & co
                   </div>
-                 
+
                 </div>
               </div>
             </footer>
