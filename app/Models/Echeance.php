@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Echeance extends Model
 {
-    protected $fillable = ['titre_echeance', 'clients_id', 'statut_id', 'fichier'];
-    protected $dates = ['date_echeance'];
-    public function clients(){
-        return $this->belongsTo(Client::class);
-    }
-    public function statut(){
-        return $this->belongsTo(Statut::class);
-    }
-
+    use HasFactory;
+    protected $table = 'echeances';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'nom', 'prenoms', 'numero_whatsapp', 'date_echeance',
+        'numero_police', 'numeroclient', 'type_contrat'
+    ];
 }

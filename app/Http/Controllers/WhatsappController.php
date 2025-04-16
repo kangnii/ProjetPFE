@@ -2,42 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
-use App\Providers\WhatsAppService;
+use Illuminate\Support\Facades\Log;
+use App\Models\WhatsappMessage;
 
 class WhatsappController extends Controller
 {
-    protected $whatsapp;
-
-    public function __construct(WhatsAppService $whatsapp)
+    public function handle(Request $request)
     {
-        $this->whatsapp = $whatsapp;
+        if ($request->isMethod('get')) {
+            return $this->verify($request);
+        }
+
+        $data = $request->all();
+
+        foreach ($data['entry'] ?? [] as $entry) {
+            foreach ($entry['changes'] ?? [] as $change) {
+                $value = $change['value'] ?? [];
+
+                if (isset($value['statuses'])) {
+                    foreach ($value['statuses'] as $status) {
+                        WhatsappMessage::where('message_id', $status['id'])->update([
+                            'status' => $status['status'],
+                        ]);
+                        Log::info("✅ Statut WhatsApp mis à jour : " . $status['status']);
+                    }
+                }
+            }
+        }
+
+        return response('OK', 200);
     }
 
-
-    public function index()
+    private function verify(Request $request)
     {
-        return view('Test.whatsapp');
+        $verify_token = env('WHATSAPP_WEBHOOK_VERIFY_TOKEN');
+        $mode = $request->input('hub_mode');
+        $token = $request->input('hub_verify_token');
+        $challenge = $request->input('hub_challenge');
+
+        if ($mode === 'subscribe' && $token === $verify_token) {
+            return response($challenge, 200);
+        }
+
+        return response('Forbidden', 403);
     }
-    /**
-     * @throws GuzzleException
-     */
-    public function send(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $validate = $request->validate([
-            'phone' => 'required',
-            'templateName' => 'required|string',
-            'templateLanguage' => 'required|string',
-
-        ]);
-//        $phone = $request->input('phone');
-//        $templateName = $request->input('templateName');
-//        $templateLanguage = $request->input('templateLanguage');
-
-        $response = $this->whatsapp->sendMessage($request->phone, $request->templateName, $request->templateLanguage);
-
-        return redirect()->back()->with('success', 'Message envoyé avec succès !');
-    }
-
 }
