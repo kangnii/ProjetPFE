@@ -16,13 +16,12 @@ class AccueilController extends Controller
         $echeances = Echeance::where('date_echeance', '>=', today())->orderBy('date_echeance', 'asc')->get();
 
 
-        // Récupère les dernières notifications (enregistrements de messages envoyés)
-        $messages = WhatsappMessage::orderBy('created_at', 'desc')->get();
+        // Récupère les notifications (enregistrements de messages envoyés) avec une durée de 3 jours max.
+        $messages = WhatsappMessage::where('created_at', '>=',Carbon::now()->subDays(3) )->orderBy('created_at', 'desc')->get();
 
         $success = WhatsappMessage::where('status', 'sent')->orderBy('created_at', 'desc')->get();
         $fail = WhatsappMessage::where('status', 'failed')->orderBy('created_at', 'desc')->get();
-        $total = WhatsappMessage::all();
 
-        return view('Squelette.accueil', compact('echeances', 'messages', 'success', 'fail', 'total'));
+        return view('Squelette.accueil', compact('echeances', 'messages', 'success', 'fail'));
     }
 }

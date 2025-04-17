@@ -12,8 +12,26 @@ class NotificationController extends Controller
 {
     public function index()
     {
+
+        //Recup normale
         $notifications = WhatsappMessage::where('status','sent')->orderBy('created_at', 'desc')->get();
-        return view('Squelette.messages_sent', compact('notifications'));
+
+        // Récupérer le nombre de messages envoyés par heure
+        $messagesByHour = WhatsappMessage::selectRaw('HOUR(created_at) as hour, count(*) as count')
+            ->where('status', 'sent')
+            ->groupByRaw('HOUR(created_at)')
+            ->orderBy('hour', 'asc')
+            ->get();
+
+        // Récupérer les messages envoyés par jour
+        $messagesByDay = WhatsappMessage::selectRaw('DATE(created_at) as day, count(*) as count')
+            ->where('status', 'sent')
+            ->groupByRaw('DATE(created_at)')
+            ->orderBy('day', 'asc')
+            ->get();
+
+
+        return view('Squelette.messages_sent', compact('messagesByDay', 'messagesByHour', 'notifications'));
     }
     public function export()
     {
@@ -29,7 +47,9 @@ class NotificationController extends Controller
 
         // Appelle la logique d’envoi
         $success = app(WhatsappService::class)->sendMessage($message->phone ,$message->body);
-
+        if($success){
+        $message->delete();
+        }
         return back()->with('success', $success ? 'Message renvoyé !' : 'Échec de l’envoi.');
     }
 }

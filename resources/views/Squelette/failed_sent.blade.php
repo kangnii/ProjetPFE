@@ -25,7 +25,7 @@
         <table class=" table table-striped">
             <thead>
             <tr>
-                <th>Message</th>
+                <th class="w-50">Message</th>
                 <th>Statut</th>
                 <th>Date</th>
                 <th>Action</th>

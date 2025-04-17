@@ -1,5 +1,4 @@
 @extends('template')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('accueil_activation')
     active
 @endsection
@@ -9,18 +8,39 @@
             <h2 class="mb-4 text-center">📊 Tableau de bord - Statistiques des Messages</h2>
 
             <div class="row">
-                <div class="w-25 col-md-4 offset-md-2">
-                    <canvas id="messagePieChart"></canvas>
-                </div>
-                <div class="col-md-4 offset-md-2">
-                    <div class="card text-center shadow-sm">
+
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm card-border-glow green-glow">
                         <div class="card-body">
-                            <h5 class="card-title ">Envois programmés</h5>
-                            <p class="fs-1 fw-bold text-bg-warning" id="counter">0</p>
+                            <h5 class="card-title">Messages envoyés</h5>
+                            <p class="fs-1 fw-bold">
+                                <span class="counter-highlight bg-green" id="counter_messages_envoyes">0</span>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm card-border-glow red-glow">
+                        <div class="card-body">
+                            <h5 class="card-title">Messages échoués</h5>
+                            <p class="fs-1 fw-bold">
+                                <span class="counter-highlight bg-red" id="counter_envois_echoues">0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm card-border-glow orange-glow">
+                        <div class="card-body">
+                            <h5 class="card-title">Messages programmés</h5>
+                            <p class="fs-1 fw-bold">
+                                <span class="counter-highlight bg-orange" id="counter_messages_programmes">0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
             <!-- Tableau des messages programmés -->
             <div style="margin-top: 7%">
@@ -65,8 +85,8 @@
                             <thead>
                             <tr>
                                 <th>Numéro Whatsapp</th>
-                                <th>Message</th>
-                                <th>Statut</th>
+                                <th class="w-50">Message</th>
+                                <th class="w-25">Statut</th>
                                 <th>Date d'envoi</th>
                             </tr>
                             </thead>
@@ -80,9 +100,9 @@
                                         @if($message->status == 'pending')
                                             <span class="badge bg-warning">En attente</span>
                                         @elseif($message->status == 'sent')
-                                            <span class="badge bg-success w-75">Livré</span>
+                                            <span class="badge bg-success">Livré</span>
                                         @elseif($message->status == 'failed')
-                                            <span class="badge bg-danger w-75">Echec</span>
+                                            <span class="badge bg-danger">Echec</span>
                                         @endif
                                     </td>
                                     <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
@@ -116,47 +136,11 @@
             </div>
 
         <script>
-            const pieCtx = document.getElementById('messagePieChart')?.getContext('2d');
-
-            if (pieCtx) {
-                const messagePieChart = new Chart(pieCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Envoyés', 'Échoués'],
-                        datasets: [{
-                            data: [{{ $success }}, {{ $fail }}],
-                            backgroundColor: ['#28a745cc', '#dc3545cc'],
-                            borderColor: ['#28a745', '#dc3545'],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        animation: {
-                            animateRotate: true,
-                            animateScale: true,
-                            duration: 1500,
-                            easing: 'easeOutBounce'
-                        },
-                        plugins: {
-                            legend: { position: 'bottom' },
-                            title: {
-                                display: true,
-                                text: 'Répartition des messages'
-                            }
-                        }
-                    }
-                });
-            } else {
-                console.error("Canvas introuvable !");
-            }
-        </script>
-        <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const counter = document.getElementById('counter');
-                const finalValue = 1000; // ex: 42
+                const counter = document.getElementById('counter_messages_envoyes');
+                const finalValue = {{ count($success) }};
                 let current = 0;
-                const speed = Math.ceil(finalValue / 50); // ajuster la vitesse si besoin
+                const speed = Math.ceil(finalValue / 50); // ajuster la vitesse
 
                 const interval = setInterval(() => {
                     current += speed;
@@ -165,7 +149,41 @@
                         clearInterval(interval);
                     }
                     counter.textContent = current;
-                }, 30); // toutes les 30 ms
+                }, 200); // toutes les 200 ms
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const counter = document.getElementById('counter_envois_echoues');
+                const finalValue = {{ count($fail) }};
+                let current = 0;
+                const speed = Math.ceil(finalValue / 50); // ajuster la vitesse
+
+                const interval = setInterval(() => {
+                    current += speed;
+                    if (current >= finalValue) {
+                        current = finalValue;
+                        clearInterval(interval);
+                    }
+                    counter.textContent = current;
+                }, 200); // toutes les 200 ms
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const counter = document.getElementById('counter_messages_programmes');
+                const finalValue = {{ count($echeances) }};
+                let current = 0;
+                const speed = Math.ceil(finalValue / 50); // ajuster la vitesse
+
+                const interval = setInterval(() => {
+                    current += speed;
+                    if (current >= finalValue) {
+                        current = finalValue;
+                        clearInterval(interval);
+                    }
+                    counter.textContent = current;
+                }, 200); // toutes les 200 ms
             });
         </script>
 @endsection

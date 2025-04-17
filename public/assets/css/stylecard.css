@@ -1,0 +1,45 @@
+.card-border-glow {
+    position: relative;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.card-border-glow.green-glow {
+    border-color: #28a745;
+    box-shadow: 0 0 15px 5px #28a745;
+    animation: rotate-glow-green 3s linear infinite;
+}
+
+.card-border-glow.red-glow {
+    border-color: #dc3545;
+    box-shadow: 0 0 15px 5px #dc3545;
+    animation: rotate-glow-red 3s linear infinite;
+}
+
+.card-border-glow.orange-glow {
+    border-color: #fd7e14;
+    box-shadow: 0 0 15px 5px #fd7e14;
+    animation: rotate-glow-orange 3s linear infinite;
+}
+
+
+.counter-highlight {
+    display: inline-block;
+    color: white;
+    padding: 0.3em 0.6em;
+    border-radius: 0.3rem;
+}
+
+.bg-green {
+    background-color: #28a745;
+}
+
+.bg-red {
+    background-color: #dc3545;
+}
+
+.bg-orange {
+    background-color: #fd7e14;
+}
