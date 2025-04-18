@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Notification;
+use App\Models\WhatsappMessage;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class NotificationsExport implements FromCollection
@@ -12,6 +12,7 @@ class NotificationsExport implements FromCollection
     */
     public function collection()
     {
-        return Notification::all();
+        $data = WhatsappMessage::where('status', 'sent')->get();
+        return $data;
     }
 }

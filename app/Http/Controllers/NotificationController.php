@@ -35,7 +35,7 @@ class NotificationController extends Controller
     }
     public function export()
     {
-        return Excel::download(new NotificationsExport(), 'historique_envoi.xlsx');
+        return Excel::download(new NotificationsExport, 'historique_envoi.xlsx');
     }
     public function echec(){
         $notifications = WhatsappMessage::where('status','failed')->orderBy('created_at', 'desc')->get();

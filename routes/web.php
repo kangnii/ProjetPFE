@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\EcheanceContoller;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ClientController;
@@ -32,6 +35,18 @@ Route::get('/failed-sent', [NotificationController::class, 'echec'])->name('fail
 Route::post('/failed-sent/{id}/renvoi', [NotificationController::class, 'renvoi'])->name('message.renvoi');
 
 
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
+
+//Permission edit user
+Route::group(['middleware' => ['permission:edit user']], function () {
+    Route::get('modifier/permissions/utilisateur/{id}', [UserController::class, 'edit_permissions'])->name('edit.permissions');
+    Route::post('/role_update/{id}', [UserController::class, 'role_update'])->name('role_update');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+    Route::get('modifier/permissions/utilisateur/{id}', [UserController::class, 'edit_permissions'])->name('edit.permissions');
+    Route::get('reinitialiser/mot-de-passe/{id}', [UserController::class, 'reset_password'])->name('reset_password');
+});
 
 
 

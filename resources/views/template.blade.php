@@ -126,6 +126,25 @@
               </a>
             </li>
 
+              <li class="menu-item open">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                      <i class="menu-icon tf-icons ti ti-settings"></i>
+                      <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+                  </a>
+                  <ul class="menu-sub">
+                      <li class="menu-item @yield('role_activation') mt-3 ">
+                          <a href="{{route('roles.index')}}" class="menu-link ">
+                              <div data-i18n="Roles">Roles</div>
+                          </a>
+                      </li>
+                      <li class="menu-item @yield('permission_activation')">
+                          <a href="{{route('permissions.index')}}" class="menu-link">
+                              <div data-i18n="Permissions">Permissions</div>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
 
           </ul>
         </aside>
