@@ -36,7 +36,6 @@ Route::post('/failed-sent/{id}/renvoi', [NotificationController::class, 'renvoi'
 
 
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
-Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
 
 
 //Permission edit user

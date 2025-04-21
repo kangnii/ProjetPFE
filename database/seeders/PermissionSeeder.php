@@ -21,8 +21,20 @@ class PermissionSeeder extends Seeder
 
         // Liste des permissions avec description
         $permissions = [
-            ["name" => "view document", "description" => "Voir un document"],
-
+            ["name" => "Ajouter echeance", "description" => " Ajouter échéance"],
+            ["name" => "Charger un fichier excel echeance ", "description" => "Charger un fichier d'échéance excel"],
+            ["name" => "Ajouter client", "description" => "Ajouter client"],
+            ["name" => "Modifier client", "description" => "Modifier client"],
+            ["name" => "Supprimer client", "description" => "Supprimer client"],
+            ["name" => "Modifier echeance", "description" => "Modifier échéance"],
+            ["name" => "Supprimer echeance", "description" => "Supprimer échéance"],
+            ["name" => "Renvoyer echeance", "description" => "Renvoyer échéance"],
+            ["name" => "Telecharger historique envoi", "description" => "Télécharger historique envoi"],
+            ["name" => "Ajouter role", "description" => "Ajouter rôle"],
+            ["name" => "Supprimer role", "description" => "Supprimer rôle"],
+            ["name" => "Modifier role", "description" => "Modifier rôle"],
+            ["name" => "Assigner permissions", "description" => "Assigner permissions"],
+            ["name" => "Voir roles", "description" => "Voir röles"],
         ];
 
 
@@ -33,19 +45,10 @@ class PermissionSeeder extends Seeder
 
         // Création des rôles
         $adminRole = Role::updateOrCreate(['name' => 'admin']);
-        $editorRole = Role::updateOrCreate(['name' => 'editeur']);
 
         // Attribution des permissions au rôle admin
         $adminRole->givePermissionTo(Permission::all());
 
-        // Attribution de quelques permissions au rôle editor
-        $editorPermissions = [
-            'view document version history',
-            'create service/position',
-            'view court/prosecution details',
-        ];
-
-        $editorRole->givePermissionTo($editorPermissions);
 
     }
 }

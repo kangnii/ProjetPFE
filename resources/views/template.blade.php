@@ -15,13 +15,15 @@
 
     <title>Envoi d'échéances</title>
 
+      <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
 
 
 
       <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon/favicon.ico')}}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,6 +66,9 @@
     <script src="{{asset('assets/js/config.js')}}"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      <!-- datatable js -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
 
   </head>
 
@@ -126,23 +131,12 @@
               </a>
             </li>
 
-              <li class="menu-item open">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons ti ti-settings"></i>
-                      <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+              <!-- Rôles -->
+              <li class="menu-item  @yield('role_activation') mt-3">
+                  <a href="{{route('roles.index')}}" class="menu-link ">
+                      <i class="menu-icon tf-icons ti ti-crown"></i>
+                      <div data-i18n="Rôles">Rôles</div>
                   </a>
-                  <ul class="menu-sub">
-                      <li class="menu-item @yield('role_activation') mt-3 ">
-                          <a href="{{route('roles.index')}}" class="menu-link ">
-                              <div data-i18n="Roles">Roles</div>
-                          </a>
-                      </li>
-                      <li class="menu-item @yield('permission_activation')">
-                          <a href="{{route('permissions.index')}}" class="menu-link">
-                              <div data-i18n="Permissions">Permissions</div>
-                          </a>
-                      </li>
-                  </ul>
               </li>
 
 
@@ -337,5 +331,12 @@
 
     <!-- Page JS -->
     <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#usersTable').DataTable();
+        } );
+    </script>
   </body>
 </html>
