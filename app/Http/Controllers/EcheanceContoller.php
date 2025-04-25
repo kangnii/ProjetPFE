@@ -101,6 +101,6 @@ class EcheanceContoller extends Controller
         if ($destroy) {
             $destroy->delete();
         }
-        return redirect()->route('echeance.index');
+        return redirect()->route('echeance.index')->with('success', 'échéance supprimée avec succès.');
     }
 }

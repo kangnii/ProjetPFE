@@ -13,9 +13,7 @@
                 </ul>
             </div>
         @endif
-        @if(session('success'))
-            {{session('success')}}
-        @endif
+
     <h3 >Chargement des avis d'écheance</h3>
         <form action="{{route('echeances.import')}}" method="post" enctype="multipart/form-data">
             @csrf
@@ -64,6 +62,16 @@
             </div>
 
         </form>
+
+            <div class="mt-3">
+            {{-- Flash messages --}}
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+            </div>
 
         <table class="text-center table table-striped mt-5">
             <thead>

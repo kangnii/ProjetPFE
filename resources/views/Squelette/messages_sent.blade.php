@@ -75,48 +75,128 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Récupérer les données depuis le contrôleur Laravel
-                    // Créer un tableau pour les heures, les comptes horaires et les jours
-                    const hours = @json($messagesByHour).map(item => item.hour +"h");
-                    const countsByHour = @json($messagesByHour).map(item => item.count);
-                    const days = @json($messagesByDay).map(item => item.day);
-                    const countsByDay = @json($messagesByDay).map(item => item.count);
+        {{--document.addEventListener('DOMContentLoaded', function() {--}}
+        {{--    // Récupérer les données depuis le contrôleur Laravel--}}
+        {{--            // Créer un tableau pour les heures, les comptes horaires et les jours--}}
+        {{--            const hours = @json($messagesByHour).map(item => item.hour +"h");--}}
+        {{--            const countsByHour = @json($messagesByHour).map(item => item.count);--}}
+        {{--            const days = @json($messagesByDay).map(item => item.day);--}}
+        {{--            const countsByDay = @json($messagesByDay).map(item => item.count);--}}
 
-                    // Créer le graphique avec Chart.js
-                    const ctx = document.getElementById('messagesChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line', // Graphique linéaire
-                        data: {
-                            labels: [...hours, ...days],  // Heures de la journée
-                            datasets: [
-                                {
-                                    label: 'Messages envoyés par heure',
-                                    data: countsByHour, // Le nombre de messages envoyés à chaque heure
-                                    borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la ligne
-                                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de remplissage
-                                    fill: true,
-                                    tension: 0.4
-                                },
-                                {
-                                    label: 'Messages envoyés par jour',
-                                    data: countsByDay, // Nombre total de messages envoyés chaque jour
-                                    borderColor: 'rgba(255, 99, 132, 1)', // Couleur différente pour la deuxième ligne
-                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                    fill: false, // Ne pas remplir la zone sous la ligne
-                                    tension: 0.4
-                                }
-                            ]
+        {{--            // Créer le graphique avec Chart.js--}}
+        {{--            const ctx = document.getElementById('messagesChart').getContext('2d');--}}
+        {{--            new Chart(ctx, {--}}
+        {{--                type: 'line', // Graphique linéaire--}}
+        {{--                data: {--}}
+        {{--                    labels: [...hours, ...days],  // Heures de la journée--}}
+        {{--                    datasets: [--}}
+        {{--                        {--}}
+        {{--                            label: 'Messages envoyés par heure',--}}
+        {{--                            data: countsByHour, // Le nombre de messages envoyés à chaque heure--}}
+        {{--                            borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la ligne--}}
+        {{--                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de remplissage--}}
+        {{--                            fill: true,--}}
+        {{--                            tension: 0.4--}}
+        {{--                        },--}}
+        {{--                        {--}}
+        {{--                            label: 'Messages envoyés par jour',--}}
+        {{--                            data: countsByDay, // Nombre total de messages envoyés chaque jour--}}
+        {{--                            borderColor: 'rgba(255, 99, 132, 1)', // Couleur différente pour la deuxième ligne--}}
+        {{--                            backgroundColor: 'rgba(255, 99, 132, 0.2)',--}}
+        {{--                            fill: false, // Ne pas remplir la zone sous la ligne--}}
+        {{--                            tension: 0.4--}}
+        {{--                        }--}}
+        {{--                    ]--}}
+        {{--                },--}}
+        {{--                options: {--}}
+        {{--                    scales: {--}}
+        {{--                        y: {--}}
+        {{--                            beginAtZero: true--}}
+        {{--                        }--}}
+        {{--                    }--}}
+        {{--                }--}}
+        {{--            });--}}
+        {{--        })--}}
+        document.addEventListener('DOMContentLoaded', function() {
+            // Données depuis le contrôleur Laravel
+            const hours = @json($messagesByHour).map(item => item.hour + "h");
+            const countsByHour = @json($messagesByHour).map(item => item.count);
+            const days = @json($messagesByDay).map(item => item.day);
+            const countsByDay = @json($messagesByDay).map(item => item.count);
+
+            const ctx = document.getElementById('messagesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Messages envoyés par heure',
+                            data: hours.map((hour, i) => ({ x: hour, y: countsByHour[i] })),
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            xAxisID: 'xHours'
                         },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
+                        {
+                            label: 'Messages envoyés par jour',
+                            data: days.map((day, i) => ({ x: day, y: countsByDay[i] })),
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: false,
+                            tension: 0.4,
+                            xAxisID: 'xDays'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    stacked: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre de messages'
+                            }
+                        },
+                        xHours: {
+                            type: 'category',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Heures'
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        xDays: {
+                            type: 'category',
+                            position: 'top',
+                            title: {
+                                display: true,
+                                text: 'Jours'
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxRotation: 45,
+                                minRotation: 0
+                            },
+                            grid: {
+                                drawOnChartArea: false // Évite les lignes de grille superposées
                             }
                         }
-                    });
-                })
+                    }
+                }
+            });
+        });
     </script>
 
 

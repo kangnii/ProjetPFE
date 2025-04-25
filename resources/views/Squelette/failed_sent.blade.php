@@ -28,6 +28,7 @@
                 <th class="w-50">Message</th>
                 <th>Statut</th>
                 <th>Date</th>
+                <th class="w-25">Motif</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -45,10 +46,11 @@
                         @endif
                     </td>
                     <td>{{ $notification->created_at->format('d/m/Y H:i') }}</td>
+                    <td><span class="badge bg-warning ">{{ $notification->phone == '22990830108'? 'Token expiré' : "numéro invalide"}}  </span></td>
                     <td><form action={{ route('message.renvoi', ['id' => $notification->id]) }} method="POST">
                             @csrf
                             @method('POST')
-                            <button class="btn btn-sm btn-primary w-75"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
+                            <button class="btn btn-sm btn-primary"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
                         </form></td>
                 </tr>
             @empty

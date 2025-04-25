@@ -13,6 +13,12 @@
         @if(session('danger'))
             <div class="alert alert-danger">{{ session('danger') }}</div>
         @endif
+        <div class="mt-3">
+            <a href="{{route('client.create')}}" class="btn btn-success mt-3 d-inline-block">
+                <i class="bi bi-plus-circle"></i> Ajouter client
+            </a>
+        </div>
+
 
         <table class="table table-striped text-center mt-3">
             <thead>
@@ -54,9 +60,7 @@
             </tbody>
 
         </table>
-        <a href="{{route('client.create')}}" class="btn btn-success mt-3 d-inline-block">
-            <i class="bi bi-plus-circle"></i> Ajouter client
-        </a>
+
     </div>
 
 

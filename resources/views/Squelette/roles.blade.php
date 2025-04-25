@@ -5,8 +5,16 @@
 
 @section('content')
     <div class="container mt-5">
+        {{-- Flash messages --}}
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         <div class="mb-3">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRoleModal">
                 <i class="ti ti-plus"></i> Ajouter un rôle
             </button>
         </div>
@@ -17,6 +25,7 @@
                 <table id="usersTable" class="table table-striped">
                     <thead>
                     <tr>
+                        <th class="w-25">Numero</th>
                         <th>Nom de rôle</th>
                         <th>Permissions</th>
                         <th>Actions</th>
@@ -25,11 +34,11 @@
                     <tbody>
                     @foreach($roles as $role)
                         <tr>
+                            <td>{{ $loop ->iteration }}</td>
                             <td>{{ $role ->name }}</td>
                             <td>
-                                @foreach ($role->permissions as $permission)
-                                    <span class="badge bg-primary my-2 mx-2">{{ $permission->name }}</span>
-                                @endforeach
+{{--                                @foreach ($role->permissions as $permission)--}}
+                                    <span class="badge bg-primary my-2 mx-2">{{ $role->permissions->count() }}</span>
                             </td>
                             <td>
                                 <form action="{{ route('roles.edit', $role) }}" method="POST" onsubmit="return confirm('Modifier ce rôle ?')">
@@ -91,18 +100,18 @@
                                                 </td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="select-all" />
+                                                        <input class="form-check-input" type="checkbox" id="select-all"  name="select-all" />
                                                         <label class="form-check-label" for="select-all"> Tous sélectionner </label>
                                                     </div>
                                                 </td>
                                             </tr>
                                             @foreach($permissions as $permission)
                                                 <tr>
-                                                    <td class="text-nowrap fw-medium"><label for="permission{{ $permission->id }}">{{ $permission->name }}</label></td>
+                                                    <td class="text-nowrap fw-medium"><label for="perm{{ $permission->id }}">{{ $permission->name }}</label></td>
                                                     <td>
                                                         <div class="d-flex">
                                                             <div class="form-check me-3 me-lg-5">
-                                                                <input class="form-check-input item" type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="permission{{ $permission->id }}" />
+                                                                <input class="form-check-input item" type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="perm{{ $permission->id }}" />
                                                             </div>
                                                         </div>
                                                     </td>
@@ -126,6 +135,7 @@
                                 </div>
                             </form>
                             <!-- Cocher toutes les cases avec le selector all -->
+                            @push('scripts')
                             <script>
                                 document.getElementById('select-all').addEventListener('change', function (){
                                     const checkboxes = document.querySelectorAll('.item');
@@ -135,6 +145,7 @@
                                     }
                                 });
                             </script>
+                            @endpush
                         </div>
 
                     </div>

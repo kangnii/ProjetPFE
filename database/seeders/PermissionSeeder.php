@@ -33,8 +33,11 @@ class PermissionSeeder extends Seeder
             ["name" => "Ajouter role", "description" => "Ajouter rôle"],
             ["name" => "Supprimer role", "description" => "Supprimer rôle"],
             ["name" => "Modifier role", "description" => "Modifier rôle"],
-            ["name" => "Assigner permissions", "description" => "Assigner permissions"],
-            ["name" => "Voir roles", "description" => "Voir röles"],
+            ["name" => "Voir roles", "description" => "Voir rôles"],
+            ["name" => "Voir clients", "description" => "Voir clients"],
+            ["name" => "Voir echeances", "description" => "Voir échéances"],
+            ["name" => "Voir messages envoyes", "description" => "Voir messages envoyés"],
+            ["name" => "Voir envois echoues", "description" => "Voir envois échoués"],
         ];
 
 
