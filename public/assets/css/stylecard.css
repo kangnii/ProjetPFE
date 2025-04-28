@@ -43,3 +43,192 @@
 .bg-orange {
     background-color: #fd7e14;
 }
+/* Styles communs */
+.spinner-wrapper {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Base commune */
+.spinner-circle-planned,
+.spinner-circle-success,
+.spinner-circle-error {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style pour les messages programmés (Orange) */
+.spinner-circle-planned::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #fd7e14;
+    animation: spinAndFillOrange 5s forwards;
+}
+.spinner-circle-planned i {
+    color: #fd7e14;
+    font-size: 16px;
+    font-weight: 900;
+    z-index: 1;
+}
+
+/* Style pour les messages envoyés (Vert) */
+.spinner-circle-success::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #198754;
+    animation: spinAndFillGreen 5s forwards;
+}
+.spinner-circle-success i {
+    color: #198754;
+    font-size: 18px;
+    font-weight: 900;
+    z-index: 1;
+}
+
+/* Style pour les messages échoués (Rouge) */
+.spinner-circle-error::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #dc3545;
+    animation: spinAndFillRed 5s forwards;
+}
+.spinner-circle-error i {
+    color: #dc3545;
+    font-size: 18px;
+    font-weight: 900;
+    z-index: 1;
+}
+
+/* Animation pour l'orange (Messages programmés) */
+@keyframes spinAndFillOrange {
+    0% {
+        transform: rotate(0deg);
+        border: 4px solid transparent;
+        border-top-color: #fd7e14;
+    }
+    90% {
+        transform: rotate(1440deg);
+        border: 4px solid transparent;
+        border-top-color: #fd7e14;
+    }
+    100% {
+        transform: rotate(1440deg);
+        border: 4px solid #fd7e14;
+        background-color: transparent;
+    }
+}
+
+/* Animation pour le vert (Messages envoyés) */
+@keyframes spinAndFillGreen {
+    0% {
+        transform: rotate(0deg);
+        border: 4px solid transparent;
+        border-top-color: #198754;
+    }
+    90% {
+        transform: rotate(1440deg);
+        border: 4px solid transparent;
+        border-top-color: #198754;
+    }
+    100% {
+        transform: rotate(1440deg);
+        border: 4px solid #198754;
+        background-color: transparent;
+    }
+}
+
+/* Animation pour le rouge (Messages échoués) */
+@keyframes spinAndFillRed {
+    0% {
+        transform: rotate(0deg);
+        border: 4px solid transparent;
+        border-top-color: #dc3545;
+    }
+    90% {
+        transform: rotate(1440deg);
+        border: 4px solid transparent;
+        border-top-color: #dc3545;
+    }
+    100% {
+        transform: rotate(1440deg);
+        border: 4px solid #dc3545;
+        background-color: transparent;
+    }
+}
+
+/* Versions webkit pour la compatibilité */
+@-webkit-keyframes spinAndFillOrange {
+    0% {
+        -webkit-transform: rotate(0deg);
+        border: 2px solid transparent;
+        border-top-color: #fd7e14;
+    }
+    90% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid transparent;
+        border-top-color: #fd7e14;
+    }
+    100% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid #fd7e14;
+        background-color: transparent;
+    }
+}
+
+@-webkit-keyframes spinAndFillGreen {
+    0% {
+        -webkit-transform: rotate(0deg);
+        border: 2px solid transparent;
+        border-top-color: #198754;
+    }
+    90% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid transparent;
+        border-top-color: #198754;
+    }
+    100% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid #198754;
+        background-color: transparent;
+    }
+}
+
+@-webkit-keyframes spinAndFillRed {
+    0% {
+        -webkit-transform: rotate(0deg);
+        border: 2px solid transparent;
+        border-top-color: #dc3545;
+    }
+    90% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid transparent;
+        border-top-color: #dc3545;
+    }
+    100% {
+        -webkit-transform: rotate(1440deg);
+        border: 2px solid #dc3545;
+        background-color: transparent;
+    }
+}
+
+

@@ -101,36 +101,46 @@
                 <div class="badge bg-primary rounded-pill ms-auto">2</div>
               </a>
               <ul class="menu-sub " >
+                  @can('Voir messages envoyes')
                 <li class="menu-item @yield('messages_sent_activation')">
                   <a href="{{route('messages_sent.index')}}" class="menu-link">
                     <div data-i18n="Messages envoyés">Messages envoyés </div>
                   </a>
                 </li>
+                  @endcan
+
+                  @can('Voir envois echoues')
                 <li class="menu-item @yield('failed_sent_activation')" >
                   <a href="{{route('failed_sent.index')}}" class="menu-link">
                     <div data-i18n="Envois échoués">Messages échoués</div>
                   </a>
                 </li>
+                  @endcan
               </ul>
             </li>
 
+
+              @can('Voir echeances')
               <!-- Gestion des échéances -->
               <li class="menu-item  @yield('echeances_activation') mt-3">
                   <a href="{{route('echeance.index')}}" class="menu-link ">
                       <i class="menu-icon tf-icons ti ti-folder"></i>
                       <div data-i18n="Avis d'échéance">Avis d'échéance</div>
                   </a>
-
               </li>
+              @endcan
 
-            <!-- Clients -->
+              @can('Voir clients')
             <li class="menu-item  @yield('client_activation') mt-3">
               <a href="{{route('client.index')}}" class="menu-link ">
                 <i class="menu-icon tf-icons ti ti-user"></i>
                 <div data-i18n="Clients">Clients</div>
               </a>
             </li>
+              @endcan
+            <!-- Clients -->
 
+              @can('Voir roles')
               <!-- Rôles -->
               <li class="menu-item  @yield('role_activation') mt-3">
                   <a href="{{route('roles.index')}}" class="menu-link ">
@@ -138,6 +148,7 @@
                       <div data-i18n="Rôles">Rôles</div>
                   </a>
               </li>
+              @endcan
 
 
           </ul>
@@ -195,7 +206,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
+                      <a class="dropdown-item" href="#">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -203,8 +214,9 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-medium d-block">{{ auth()->user()->name }}</span>
+                            <small class="text-muted"> {{ auth()->user()->getRoleNames()->first() }}
+                            </small>
                           </div>
                         </div>
                       </a>
@@ -213,18 +225,11 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-profile-user.html">
+                      <a class="dropdown-item" href="{{ route('profile')}}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
-                        <span class="align-middle">My Profile</span>
+                        <span class="align-middle">Mon Profil</span>
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
-                        <i class="ti ti-settings me-2 ti-sm"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-
 
                     <li>
                       <div class="dropdown-divider"></div>
@@ -232,7 +237,7 @@
                     <li>
                       <div class="dropdown-item d-flex align-items-center" >
                         <i class="ti ti-logout me-2 ti-sm"></i>
-                          <form method="POST" action="#" class="m-0 p-0">
+                          <form method="POST" action="{{ route('auth.logout') }}" class="m-0 p-0">
                               @csrf
                               <button class="p-0 m-0 align-middle " style="background: transparent;border: none" type="submit">Déconnexion</button>
                           </form>
@@ -337,6 +342,52 @@
     <script>
         $(document).ready( function () {
             $('#usersTable').DataTable({
+                searching : true,
+                autoWidth: true,
+                lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun résultat trouvé",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
+                    "infoEmpty": "Aucun élément à afficher",
+                    "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                }
+            });
+        } );
+    </script>
+    <script>
+        $(document).ready( function () {
+            $('#echeancesTable').DataTable({
+                searching : true,
+                autoWidth: true,
+                lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun résultat trouvé",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
+                    "infoEmpty": "Aucun élément à afficher",
+                    "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                }
+            });
+        } );
+    </script>
+    <script>
+        $(document).ready( function () {
+            $('#clientsTable').DataTable({
                 searching : true,
                 autoWidth: true,
                 lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],

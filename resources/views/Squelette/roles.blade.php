@@ -14,9 +14,11 @@
         @endif
 
         <div class="mb-3">
+            @can('Ajouter role')
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRoleModal">
                 <i class="ti ti-plus"></i> Ajouter un rôle
             </button>
+            @endcan
         </div>
 
         <!-- Table -->
@@ -41,17 +43,21 @@
                                     <span class="badge bg-primary my-2 mx-2">{{ $role->permissions->count() }}</span>
                             </td>
                             <td>
+                                @can('Modifier role')
                                 <form action="{{ route('roles.edit', $role) }}" method="POST" onsubmit="return confirm('Modifier ce rôle ?')">
                                     @csrf
                                     @method('GET')
-                                    <button class="btn btn-sm btn-primary w-75">Modifier</button>
+                                    <button class="btn btn-sm btn-primary w-25"><i class="bi bi-pencil"></i></button>
                                 </form>
+                                @endcan
 
+                                @can('Supprimer role')
                                 <form action="{{ route('roles.destroy', $role) }}" method="POST" onsubmit="return confirm('Supprimer ce rôle ?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger mt-2 w-75">Supprimer</button>
+                                    <button class="btn btn-sm btn-danger mt-2 w-25"><i class="bi bi-trash"></i></button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

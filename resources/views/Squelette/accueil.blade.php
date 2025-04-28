@@ -11,33 +11,52 @@
 
                 <div class="col-md-4">
                     <div class="card text-center shadow-sm card-border-glow green-glow">
-                        <div class="card-body">
+                        <div class="card-body position-relative">
                             <h5 class="card-title">Messages envoyés</h5>
                             <p class="fs-1 fw-bold">
                                 <span class="counter-highlight bg-green" id="counter_messages_envoyes">0</span>
                             </p>
+                            <div class="spinner-wrapper">
+                                <div class="spinner-circle-success">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="card text-center shadow-sm card-border-glow red-glow">
-                        <div class="card-body">
+                        <div class="card-body position-relative">
                             <h5 class="card-title">Messages échoués</h5>
                             <p class="fs-1 fw-bold">
                                 <span class="counter-highlight bg-red" id="counter_envois_echoues">0</span>
                             </p>
+                            <div class="spinner-wrapper">
+                                <div class="spinner-circle-error">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="card text-center shadow-sm card-border-glow orange-glow">
-                        <div class="card-body">
+                        <div class="card-body position-relative">
                             <h5 class="card-title">Messages programmés</h5>
                             <p class="fs-1 fw-bold">
                                 <span class="counter-highlight bg-orange" id="counter_messages_programmes">0</span>
                             </p>
+                            <div class="spinner-wrapper">
+                                <div class="spinner-circle-planned">
+                                    <i class="fas fa-hourglass"></i>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

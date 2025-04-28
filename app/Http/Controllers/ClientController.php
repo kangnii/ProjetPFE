@@ -38,7 +38,7 @@ class ClientController extends Controller
 
        $client->save();
 
-        return redirect()->route('client.create')->with('success', 'Client ajouté avec succès !');
+        return redirect()->route('client.index')->with('success', 'Client ajouté avec succès !');
 
     }
 

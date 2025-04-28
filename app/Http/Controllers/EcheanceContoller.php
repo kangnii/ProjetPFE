@@ -30,7 +30,7 @@ class EcheanceContoller extends Controller
             'file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
         Excel::import(new EcheancesImport, $request->file('file'));
-        return back()->with('success', 'Excel Data Imported successfully.');
+        return redirect()->route('echeance.index')->with('success', 'Données Excel Importées avec succès.');
 
     }
 
@@ -67,7 +67,7 @@ class EcheanceContoller extends Controller
             'date_echeance'   => $request->input('date_echeance'),
         ]);
 
-        return redirect()->back()->with('success', 'Échéance ajoutée avec succès.');
+        return redirect()->route('echeance.index')->with('success', 'Échéance ajoutée avec succès.');
 
     }
 

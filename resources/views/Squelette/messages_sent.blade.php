@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container mt-5" x-data="{ expanded: false, search: '', statusFilter: '', startDate: '', endDate: '' }">
-        <h2>Messages envoyés</h2>
+        <h2 class="mt-3 fw-bold">Messages envoyés</h2>
 
         <div style="width: 50%; margin: auto;">
             <canvas id="messagesChart"></canvas>
@@ -24,6 +24,15 @@
                 <input type="date" class="form-control" x-model="endDate">
             </div>
         </div>
+
+            <div>
+        @can('Telecharger historique envoi')
+                <a href="{{ route('echeances.export') }}" class="btn btn-success mt-4 w-auto">
+                    <i class="bi bi-file-earmark-excel me-1"></i> Exporter en Excel
+                </a>
+        @endcan
+            </div>
+
 
         <!-- Tableau des messages -->
         <table class="table table-striped">
@@ -68,9 +77,7 @@
             </div>
         @endif
 
-        <a href="{{ route('echeances.export') }}" class="btn btn-success mt-4 col-md-2">
-            <i class="bi bi-file-earmark-excel me-1"></i> Exporter en Excel
-        </a>
+
 
     </div>
 

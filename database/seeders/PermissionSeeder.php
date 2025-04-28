@@ -22,7 +22,7 @@ class PermissionSeeder extends Seeder
         // Liste des permissions avec description
         $permissions = [
             ["name" => "Ajouter echeance", "description" => " Ajouter échéance"],
-            ["name" => "Charger un fichier excel echeance ", "description" => "Charger un fichier d'échéance excel"],
+            ["name" => "Charger un fichier excel echeance", "description" => "Charger un fichier d'échéance excel"],
             ["name" => "Ajouter client", "description" => "Ajouter client"],
             ["name" => "Modifier client", "description" => "Modifier client"],
             ["name" => "Supprimer client", "description" => "Supprimer client"],

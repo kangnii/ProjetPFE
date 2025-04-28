@@ -14,7 +14,7 @@
             </div>
         @endif
 
-    <h3 >Chargement des avis d'écheance</h3>
+    <h3 class="fw-bold mt-3">Gestion des avis d'écheance</h3>
         <form action="{{route('echeances.import')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3 mt-3">
@@ -24,13 +24,15 @@
             </div>
             <div class="form-group mt-2">
             <label for="file">Sélectionner le fichier excel ou csv : </label>
-            <input type="file" name="file" id="file" class="form-control @error('file')is-invalid @enderror mt-3">
+                <div class="input-group" style="width: auto;">
+                <input type="file" name="file" id="file" class="form-control w-75 me-3 @error('file')is-invalid @enderror mt-3">
+                @can('Charger un fichier excel echeance')<button type="submit" class="btn btn-success mt-3"><i class="bi bi-upload me-1"></i>Charger</button>@endcan
+                </div>
                 @error('file')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
                 @enderror
-                <button type="submit" class="btn btn-success mt-3"><i class="bi bi-upload me-1"></i>Charger</button>
 
 {{--                //le modal pour afficher le popup--}}
             </div>
@@ -73,7 +75,12 @@
             @endif
             </div>
 
-        <table class="text-center table table-striped mt-5">
+            @can('Ajouter echeance')
+            <a href="{{route('echeance.create')}}" class="btn btn-success mt-5">
+                <i class="bi bi-plus-circle me-1"></i>Ajouter échéance
+            </a>
+            @endcan
+        <table id="echeancesTable" class="text-center table table-striped ">
             <thead>
             <tr>
                 <th>numéro</th>
@@ -99,17 +106,21 @@
                 <td>{{$echeance->type_contrat}}</td>
                 <td>{{ \Carbon\Carbon::parse($echeance->date_echeance)->format('d/m/Y')}}</td>
                 <td>
+                    @can('Modifier echeance')
                     <form action="{{ route('echeance.edit', $echeance->id) }}" method="POST" onsubmit="return confirm('Modifier cette échéance ?')">
                         @csrf
                         @method('GET')
-                        <button class="btn btn-sm btn-primary w-100">Modifier</button>
+                        <button class="btn btn-sm btn-primary w-50"><i class="bi bi-pencil"></i></button>
                     </form>
+                    @endcan
 
+                    @can('Supprimer echeance')
                     <form action="{{ route('echeance.destroy', $echeance->id) }}" method="POST" onsubmit="return confirm('Supprimer cette échéance ?')">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger mt-2 w-100">Supprimer</button>
+                        <button class="btn btn-sm btn-danger mt-2 w-50"><i class="bi bi-trash"></i></button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @empty
@@ -117,8 +128,6 @@
             @endforelse
             </tbody>
         </table>
-            <a href="{{route('echeance.create')}}" class="btn btn-success mt-3">
-                <i class="bi bi-plus-circle me-1"></i>Ajouter échéance
-            </a>
+
     </div>
 @endsection

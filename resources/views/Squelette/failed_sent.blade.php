@@ -6,7 +6,7 @@
 @section('content')
     <div class="container mt-5" x-data="{ expanded: false, search: '', statusFilter: '', startDate: '', endDate: '' }">
 
-        <h2>Envois échoués</h2>
+        <h2 class="mt-3 fw-bold">Envois échoués</h2>
 
         <!-- Filtres -->
         <div class="row mb-3" style="margin-top: 7%">
@@ -50,7 +50,9 @@
                     <td><form action={{ route('message.renvoi', ['id' => $notification->id]) }} method="POST">
                             @csrf
                             @method('POST')
-                            <button class="btn btn-sm btn-primary"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
+                            @can('Renvoyer echeance')
+                                <button class="btn btn-sm btn-primary"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
+                            @endcan
                         </form></td>
                 </tr>
             @empty
