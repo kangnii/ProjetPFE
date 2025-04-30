@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2 class="mb-3">🖌️ Modifier une échéance</h2>
+        <h3 class="mb-3 fw-bold">🖌️ Modifier une échéance</h3>
 
         <!-- Affichage des erreurs de validation -->
         @if($errors->any())
@@ -58,7 +58,8 @@
                 <input type="text" class="form-control" id="date_echeance" name="date_echeance" value="{{ old('date_echeance', $echeance->date_echeance) }}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
+            <button type="submit" class="btn btn-primary mt-3 me-3">Mettre à jour</button>
+            <a class="btn btn-secondary w-auto mt-3" href="{{ route('echeance.index') }}">Annuler</a>
         </form>
     </div>
 @endsection

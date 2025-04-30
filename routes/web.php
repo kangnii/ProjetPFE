@@ -15,7 +15,6 @@ Route::post('/login/store', [AuthController::class, 'LoginFormStore'])->name('lo
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-//    Route::post('/profile/', [AuthController::class, 'profile'])->name('update.profile');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/accueil', [AccueilController::class, 'index'])->name('accueil');

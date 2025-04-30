@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div class="container mt-5" x-data="{ expanded: false, search: '', statusFilter: '', startDate: '', endDate: '' }">
+    <div class="container mt-3" x-data="{ expanded: false, search: '', statusFilter: '', startDate: '', endDate: '' }">
         <h2 class="mt-3 fw-bold">Messages envoyés</h2>
 
         <div style="width: 50%; margin: auto;">
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Filtres -->
-        <div class="row mb-3" style="margin-top: 7%">
+        <div class="row mb-3 mt-4">
             <div class="col-md-4">
                 <input type="text" class="form-control" placeholder="Rechercher un message..." x-model="search">
             </div>

@@ -4,7 +4,9 @@
     @endsection
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-3">
+        <h3 class="mt-3 fw-bold">Rôles</h3>
+
         {{-- Flash messages --}}
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -132,11 +134,11 @@
                                 <div class="col-12 text-center mt-4">
                                     <button type="submit" class="btn btn-primary me-sm-3 me-1">Soumettre</button>
                                     <button
-                                        type="reset"
+                                        type="button"
                                         class="btn btn-label-secondary"
                                         data-bs-dismiss="modal"
                                         aria-label="Close">
-                                        Cancel
+                                        Annuler
                                     </button>
                                 </div>
                             </form>

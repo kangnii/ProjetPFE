@@ -48,7 +48,8 @@
                 @error('numeroclient') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
-            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Ajouter</button>
+            <button type="submit" class="btn btn-success me-3"><i class="bi bi-check-circle"></i> Ajouter</button>
+            <a class="btn btn-secondary w-auto" href="{{ route('client.index') }}">Annuler</a>
         </form>
     </div>
 @endsection

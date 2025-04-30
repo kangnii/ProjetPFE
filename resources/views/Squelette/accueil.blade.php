@@ -4,8 +4,8 @@
 @endsection
 @section('content')
 
-        <div class="container mt-4 ">
-            <h2 class="mb-4 text-center">📊 Tableau de bord - Statistiques des Messages</h2>
+        <div class="container mt-3 ">
+            <h3 class="mb-4 text-center fw-bold mt-3"><i class="bi bi-graph-up"></i> Tableau de bord - Statistiques des Messages</h3>
 
             <div class="row">
 

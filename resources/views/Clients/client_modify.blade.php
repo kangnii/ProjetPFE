@@ -44,7 +44,8 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
+                <button type="submit" class="btn btn-primary mt-3 me-3">Mettre à jour</button>
+                <a class="btn btn-secondary w-auto mt-3" href="{{ route('client.index') }}">Annuler</a>
             </form>
         </div>
     @endsection

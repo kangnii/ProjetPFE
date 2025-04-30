@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container mt-4">
-        <h2 class="mb-3">➕ Ajouter une échéance</h2>
+        <h3 class="mb-3 fw-bold">➕ Ajouter une échéance</h3>
         <!-- Affichage des erreurs de validation -->
         @if($errors->any())
             <div class="alert alert-danger">
@@ -51,7 +51,8 @@
                 @error('date_echeance') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
-            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Ajouter</button>
+            <button type="submit" class="btn btn-success me-3"><i class="bi bi-check-circle"></i> Ajouter</button>
+            <a class="btn btn-secondary w-auto" href="{{ route('echeance.index') }}">Annuler</a>
         </form>
     </div>
 @endsection

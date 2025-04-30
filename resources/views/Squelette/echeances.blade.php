@@ -4,7 +4,9 @@
 @endsection
 @section('content')
     <div class="container mt-3 ">
-        @if($errors->any())
+        <h3 class="fw-bold mt-3">Gestion des avis d'écheance</h3>
+
+    @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach($errors->all() as $error)
@@ -14,7 +16,6 @@
             </div>
         @endif
 
-    <h3 class="fw-bold mt-3">Gestion des avis d'écheance</h3>
         <form action="{{route('echeances.import')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3 mt-3">

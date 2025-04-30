@@ -15,7 +15,7 @@
     @endif
 
     <div class="container">
-        <h2 class="mt-3">Modifier un role</h2>
+        <h3 class="mt-3 fw-bold">🖌️ Modifier un rôle</h3>
         <form class="row g-3"  method="POST" action="{{ route('roles.update', $role) }}">
             @csrf
             @method('PUT')
@@ -72,12 +72,7 @@
             </div>
             <div class="col-12 text-center mt-4">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1">Soumettre</button>
-                <button
-                    type="reset"
-                    class="btn btn-label-secondary"
-                    aria-label="Close">
-                    Cancel
-                </button>
+                <a class="btn btn-label-secondary w-auto" href="{{ route('roles.index') }}">Annuler</a>
             </div>
         </form>
     </div>
