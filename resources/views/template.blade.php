@@ -383,9 +383,9 @@
     @stack('clients')
     @stack('roles')
     <script>
-        $(document).ready( function () {
+        $(document).ready(function () {
             $('#usersTable').DataTable({
-                searching : true,
+                searching: true,
                 autoWidth: true,
                 lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],
                 language: {
@@ -401,9 +401,12 @@
                         "next": "Suivant",
                         "previous": "Précédent"
                     }
-                }
+                },
+                columnDefs: [
+                    { targets: "_all", className: "text-center align-middle" }
+                ]
             });
-        } );
+        });
     </script>
     <script>
         $(document).ready( function () {
@@ -424,7 +427,10 @@
                         "next": "Suivant",
                         "previous": "Précédent"
                     }
-                }
+                },
+                columnDefs: [
+                    { targets: "_all", className: "text-center align-middle" }
+                ]
             });
         } );
     </script>
@@ -447,7 +453,10 @@
                         "next": "Suivant",
                         "previous": "Précédent"
                     }
-                }
+                },
+                columnDefs: [
+                    { targets: "_all", className: "text-center align-middle" }
+                ]
             });
         } );
     </script>

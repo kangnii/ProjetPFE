@@ -63,7 +63,7 @@ class WhatsappService
                 'body' => $message,
                 'message_id' => optional($response->json()['messages'][0] ?? [])->id ?? null,
                 'status' => $response->successful() ? 'sent' : 'failed',
-                'sent_at' => now()
+                'sent_at' => now()->addHour() //stocker l'heure de l'envoi avec GMT + 1
             ]);
 
             return $msg;

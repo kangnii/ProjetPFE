@@ -7,6 +7,13 @@
     <div class="container mt-4">
         <h3 class="mb-3 fw-bold">🖌️ Modifier une échéance</h3>
 
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('echeance.index') }}">Echeances</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Modifier écheance</li>
+            </ol>
+        </nav>
+
         <!-- Affichage des erreurs de validation -->
         @if($errors->any())
             <div class="alert alert-danger">

@@ -4,7 +4,15 @@
 @endsection
 @section('content')
     <div class="container mt-4">
-        <h2 class="mb-3">➕ Ajouter un Client</h2>
+        <h3 class="mb-3 fw-bold">➕ Ajouter un Client</h3>
+
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('client.index') }}">Clients</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter client</li>
+            </ol>
+        </nav>
+
         <!-- Affichage des erreurs de validation -->
         @if($errors->any())
             <div class="alert alert-danger">

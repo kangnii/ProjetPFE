@@ -16,6 +16,14 @@
 
     <div class="container">
         <h3 class="mt-3 fw-bold">🖌️ Modifier un rôle</h3>
+
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Rôles</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter rôle</li>
+            </ol>
+        </nav>
+
         <form class="row g-3"  method="POST" action="{{ route('roles.update', $role) }}">
             @csrf
             @method('PUT')
