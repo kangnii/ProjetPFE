@@ -21,8 +21,10 @@
 
 
       <meta name="description" content="" />
+      <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicon -->
+
+      <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon/favicon.ico')}}" />
 
     <!-- Fonts -->
@@ -32,10 +34,12 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
       rel="stylesheet" />
 
-    <!-- Icons --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/fontawesome.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/tabler-icons.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icons.css')}}" />
+    <!-- Icons -->
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+      <link rel="stylesheet" href="{{asset('assets/vendor/fonts/fontawesome.css')}}"/>
+      <link rel="stylesheet" href="{{asset('assets/vendor/fonts/tabler-icons.css')}}"/>
+      <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icons.css')}}"/>
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/core.css')}}" class="template-customizer-core-css" />
@@ -54,7 +58,8 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/cards-advance.css')}}" />
+      <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/cards-advance.css')}}"/>
+      <link rel="stylesheet" href="{{asset('assets/vendor/css/iziToast.css')}}"/>
       <link rel="stylesheet" href="{{asset('assets/css/stylecard.css')}}">
 
     <!-- Helpers -->
@@ -65,7 +70,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('assets/js/config.js')}}"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
       <!-- datatable js -->
       <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
@@ -78,7 +82,7 @@
       <div class="layout-container">
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="z-index: 1030 !important;">
           <div class="app-brand demo mt-5">
             <a href="{{route('accueil')}}" class="app-brand-link">
              <img src="{{asset('assets/img/icons/logocase.jpg')}}" width="180" height="85" alt="logo" class="logo">
@@ -160,6 +164,7 @@
           <!-- Navbar -->
 
           <nav
+              style="z-index: 1050 !important;"
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -201,7 +206,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{{asset('assets/img/avatars/1.png')}}" alt class="h-auto rounded-circle" />
+                      <img id="firstImage" src="{{ auth()->user()->photo ?? asset('assets/img/avatars/pp.png') }}" alt class="h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -210,7 +215,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{{asset('assets/img/avatars/1.png')}}" alt class="h-auto rounded-circle" />
+                              <img id="secondImage" src=" {{ auth()->user()->photo ?? asset('assets/img/avatars/pp.png') }}" alt class="h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -323,6 +328,7 @@
     <script src="{{asset('assets/vendor/libs/i18n/i18n.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
     <script src="{{asset('assets/vendor/js/menu.js')}}"></script>
+    <script src="{{asset('assets/vendor/js/iziToast.js')}}"></script>
 
     <!-- endbuild -->
 
@@ -337,8 +343,45 @@
     <!-- Page JS -->
     <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const SwalConfig = Swal.mixin({
+            // ... vos autres configurations ...
+            backdrop: `rgba(0,0,0,0.4)`,  // fond semi-transparent sans flou
+            customClass: {
+                backdrop: 'swal2-backdrop-custom',  // classe personnalisée pour le backdrop
+            }
+        });
+    </script>
+    <style>
+        /* Empêcher le flou sur la sidebar */
+        .swal2-backdrop-custom {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        /* OU si vous voulez être plus spécifique */
+        .swal2-container {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        /* Pour s'assurer que la sidebar reste normale */
+        .sidebar {
+            filter: none !important;
+            -webkit-filter: none !important;
+        }
+    </style>
+
+
+
     @stack('scripts')
+    @stack('photoscript')
+    @stack('echeances')
+    @stack('clients')
+    @stack('roles')
     <script>
         $(document).ready( function () {
             $('#usersTable').DataTable({

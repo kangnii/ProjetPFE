@@ -15,6 +15,10 @@ Route::post('/login/store', [AuthController::class, 'LoginFormStore'])->name('lo
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::post('profil/photo', [AuthController::class, 'update_photo'])->name('profil.photo');
+    Route::post('/profil/photo/reset', [AuthController::class, 'resetPhoto'])->name('profil.photo.reset');
+    Route::post('/profil/update', [AuthController::class, 'update_profil'])->name('profil.update');
+
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/accueil', [AccueilController::class, 'index'])->name('accueil');

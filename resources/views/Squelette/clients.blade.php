@@ -44,7 +44,7 @@
                 <td>{{$client ->numeroclient}}</td>
                     <td> @can('Modifier client')
                         <form action="{{ route('client.edit', $client->id) }}" method="POST"
-                              onsubmit="return confirm('Modifier ce client ?')">
+                              class="clientModify">
                         @csrf
                         @method('GET')
                         <button class="btn btn-sm btn-primary w-25"><i class="bi bi-pencil"></i></button>
@@ -52,7 +52,7 @@
                         @endcan
 
                         @can('Supprimer client')
-                    <form action="{{ route('client.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Supprimer ce client ?')">
+                    <form action="{{ route('client.destroy', $client->id) }}" method="POST" class="clientDelete">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger mt-2 w-25"><i class="bi bi-trash"></i></button>
@@ -70,6 +70,56 @@
         </table>
 
     </div>
+    @push('clients')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const forms = document.querySelectorAll('.clientModify');
+                const formsDelete = document.querySelectorAll('.clientDelete');
+
+                forms.forEach(form => {
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        Swal.fire({
+                            title: 'Confirmation',
+                            text: "Voulez-vous vraiment modifier ce client ?",
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Oui, modifier',
+                            cancelButtonText: 'Annuler',
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Soumet le formulaire si confirmé
+                            }
+                        });
+                    });
+                });
+                formsDelete.forEach(form => {
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        Swal.fire({
+                            title: 'Confirmation',
+                            text: "Voulez-vous vraiment supprimer ce client ?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Oui, supprimer',
+                            cancelButtonText: 'Annuler',
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Soumet le formulaire si confirmé
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+
+    @endpush
 
 
 
