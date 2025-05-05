@@ -13,11 +13,15 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/check-user', [AuthController::class, 'checkUser']);
 Route::post('/login/store', [AuthController::class, 'LoginFormStore'])->name('login.store');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'check.active'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('profil/photo', [AuthController::class, 'update_photo'])->name('profil.photo');
     Route::post('/profil/photo/reset', [AuthController::class, 'resetPhoto'])->name('profil.photo.reset');
     Route::post('/profil/update', [AuthController::class, 'update_profil'])->name('profil.update');
+    Route::get('/profil/gestion', [AuthController::class, 'gestion'])->name('profil.gestion');
+    Route::post('/profil/gestion/password', [AuthController::class, 'password'])->name('password.update');
+
+    Route::patch('/admin/users/{user}/toggle', [AuthController::class, 'toggleActiveStatus'])->name('admin.users.toggle');
 
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -97,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['permission:Renvoyer echeance']],function(){
         Route::post('/failed-sent/{id}/renvoi', [NotificationController::class, 'renvoi'])->name('message.renvoi');
+    });
+
+    Route::group(['middleware' => ['permission:Supprimer echec']],function(){
+        Route::delete('/echec/{id}/destroy', [NotificationController::class, 'failed_destroy'])->name('failed.destroy');
     });
 
 });

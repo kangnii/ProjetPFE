@@ -6,7 +6,19 @@
 @section('content')
     <div class="container mt-3" x-data="{ expanded: false, search: '', statusFilter: '', startDate: '', endDate: '' }">
 
-        <h3 class="mt-3 fw-bold">Envois échoués</h3>
+        <h3 class="mt-3 mb-3 fw-bold">Envois échoués</h3>
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
 
         <!-- Filtres -->
         <div class="row mb-3 mt-4">
@@ -47,13 +59,21 @@
                     </td>
                     <td>{{ $notification->created_at->format('d/m/Y H:i') }}</td>
                     <td><span class="badge bg-warning ">{{ $notification->phone == '22990830108'? 'Token expiré' : "numéro invalide"}}  </span></td>
-                    <td><form action={{ route('message.renvoi', ['id' => $notification->id]) }} method="POST">
+                    <td>@if ($notification->phone == '22990830108')
+                        <form action={{ route('message.renvoi', ['id' => $notification->id]) }} method="POST">
                             @csrf
                             @method('POST')
                             @can('Renvoyer echeance')
-                                <button class="btn btn-sm btn-primary"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
+                                <button class="btn btn-sm btn-primary w-auto"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
                             @endcan
-                        </form></td>
+                        </form>
+                        @endif
+                        <form action="{{ route('failed.destroy', ['id' => $notification->id]) }}" method="POST" class="failedDelete">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger mt-2 w-25"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>

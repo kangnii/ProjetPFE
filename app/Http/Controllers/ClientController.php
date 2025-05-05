@@ -18,15 +18,14 @@ class ClientController extends Controller
     public function create()
     {
         return view('Clients.client_create');
-
     }
 
     public function store(Request $request)
     {
-        $validate = request()->validate([
+        request()->validate([
             'nom' => 'required|string',
             'prenoms' => 'required|string',
-            'numero_whatsapp' => 'required|max:20|unique:clients,numero_whatsapp|:/^\+?regex[1-9]\d{1,14}$/',
+            'numero_whatsapp' => 'required|max:20|unique:clients,numero_whatsapp|regex:/^\+?[1-9]\d{1,14}$/',
             'numeroclient' => 'required|unique:clients,numeroclient'
         ]);
         $client = new Client();
@@ -34,7 +33,6 @@ class ClientController extends Controller
        $client ->prenoms = request() ->input('prenoms');
        $client ->numero_whatsapp = request() ->input('numero_whatsapp');
        $client ->numeroclient = request() ->input('numeroclient');
-
 
        $client->save();
 
@@ -63,7 +61,7 @@ class ClientController extends Controller
             $request->validate([
                 'nom' => 'required|string',
                 'prenoms' => 'required|string',
-                'numero_whatsapp' => 'required|max:20|:/^\+?regex[1-9]\d{1,14}$/',
+                'numero_whatsapp' => 'required|max:20|regex:/^\+?[1-9]\d{1,14}$/',
                 'numeroclient' => 'required'
             ]);
             $client = Client::find($id);
@@ -81,8 +79,10 @@ class ClientController extends Controller
 
         if ($client) {
             $client->delete();
-        }
           return redirect()->route('client.index')->with('success', 'Client supprimé avec succès.');
+        }else{
+            return back()->withErrors(['message' => 'Echec de la  suppression du client.']);
+        }
     }
 
 }

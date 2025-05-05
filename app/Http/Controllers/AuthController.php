@@ -183,5 +183,37 @@ class AuthController extends Controller
         }
     }
 
+    public function gestion(){
+        $users = User::where('id', '!=', 26)->get();
+        return view('Squelette.gestion', compact('users'));
+    }
+
+    public function password(Request $request){
+
+        $user = Auth::user();
+             $request->validate([
+            'password' => 'required',
+            'new_password' => 'required|string',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
+
+        if (Hash::check($request->input('password'), $user->password)) {
+            $user->update(['password' => Hash::make($request->input('new_password'))]);
+            return redirect()->route('profil.gestion')->with('success','Mot de passe mis à jour avec succès');
+        }else{
+            return back()->withErrors(['message' => 'Changement échoué. Le mot de passe de votre compte est incorrect']);
+        }
+
+
+    }
+
+    public function toggleActiveStatus(User $user)
+    {
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return redirect()->back()->with('status', "L'utilisateur a été " . ($user->is_active ? 'activé' : 'désactivé') . '.');
+    }
+
 
 }

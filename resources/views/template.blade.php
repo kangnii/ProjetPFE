@@ -82,7 +82,7 @@
       <div class="layout-container">
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="z-index: 1030 !important;">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="z-index: 1050 !important;">
           <div class="app-brand demo mt-5">
             <a href="{{route('accueil')}}" class="app-brand-link">
              <img src="{{asset('assets/img/icons/logocase.jpg')}}" width="180" height="85" alt="logo" class="logo">
@@ -164,7 +164,7 @@
           <!-- Navbar -->
 
           <nav
-              style="z-index: 1050 !important;"
+              style="z-index: 1030 !important;"
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -211,7 +211,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{ route('profil.gestion') }}">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">

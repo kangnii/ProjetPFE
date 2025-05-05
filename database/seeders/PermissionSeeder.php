@@ -38,6 +38,9 @@ class PermissionSeeder extends Seeder
             ["name" => "Voir echeances", "description" => "Voir échéances"],
             ["name" => "Voir messages envoyes", "description" => "Voir messages envoyés"],
             ["name" => "Voir envois echoues", "description" => "Voir envois échoués"],
+            ["name" =>"activer utilisateur", "description" => "activer utilisateur"],
+            ["name" =>"desactiver utilisateur", "description" => "désactiver utilisateur"],
+            ["name" =>"Supprimer echec", "description" => "Supprimer échec"]
         ];
 
 

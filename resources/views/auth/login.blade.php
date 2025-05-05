@@ -72,6 +72,14 @@
                             <div class="alert alert-danger show mb-2" role="alert">{{ $message }}</div>
                             @enderror
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                        <p>{{ $error }}</p>
+                                    @endforeach
+                                </div>
+                            @endif
+
                             <form id="login-form" class="auth-login-form mt-2" action="{{ route('login.store') }}" method="POST">
                                 @csrf
 

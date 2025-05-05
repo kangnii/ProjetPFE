@@ -52,4 +52,14 @@ class NotificationController extends Controller
         }
         return back()->with('success', $success ? 'Message renvoyé !' : 'Échec de l’envoi.');
     }
+
+    public function failed_destroy($id){
+        $echec = WhatsappMessage::find($id);
+        if($echec){
+            $echec->delete();
+        }else{
+            return back()->withErrors(['message' => 'Echec de la suppression du message.']);
+        }
+        return redirect()->route('failed_sent.index')->with('success', 'Echec supprimé avec succès');
+    }
 }
