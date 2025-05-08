@@ -13,6 +13,10 @@ class Client extends Model
     protected $primaryKey = 'id';
     protected $dates = ['created_at','updated_at'];
 
+    function echeances(){
+        return $this->hasMany(Echeance::class);
+    }
+
 
 
 }

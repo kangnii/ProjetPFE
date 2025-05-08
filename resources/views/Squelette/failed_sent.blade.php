@@ -41,7 +41,7 @@
                 <th>Statut</th>
                 <th>Date</th>
                 <th class="w-25">Motif</th>
-                <th>Action</th>
+                <th class="w-25" >Action</th>
             </tr>
             </thead>
             <tbody>
@@ -59,20 +59,23 @@
                     </td>
                     <td>{{ $notification->created_at->format('d/m/Y H:i') }}</td>
                     <td><span class="badge bg-warning ">{{ $notification->phone == '22990830108'? 'Token expiré' : "numéro invalide"}}  </span></td>
-                    <td>@if ($notification->phone == '22990830108')
-                        <form action={{ route('message.renvoi', ['id' => $notification->id]) }} method="POST">
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">@if ($notification->phone == '22990830108')
+                        <form action={{ route('message.renvoi', ['id' => $notification->id]) }}
+                              method="POST" class="form-inline">
                             @csrf
                             @method('POST')
                             @can('Renvoyer echeance')
-                                <button class="btn btn-sm btn-primary w-auto"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
+                                <button class="btn btn-sm btn-primary mb-0"><i class="bi bi-repeat me-2"></i>Renvoyer</button>
                             @endcan
                         </form>
                         @endif
-                        <form action="{{ route('failed.destroy', ['id' => $notification->id]) }}" method="POST" class="failedDelete">
+                        <form action="{{ route('failed.destroy', ['id' => $notification->id]) }}" method="POST" class="failedDelete form-inline">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger mt-2 w-25"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-sm btn-danger mb-0"><i class="bi bi-trash"></i></button>
                         </form>
+                    </div>
                     </td>
                 </tr>
             @empty

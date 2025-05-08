@@ -44,7 +44,6 @@ class NotificationController extends Controller
     public function renvoi($id)
     {
         $message= WhatsappMessage::find($id);
-
         // Appelle la logique d’envoi
         $success = app(WhatsappService::class)->sendMessage($message->phone ,$message->body);
         if($success){

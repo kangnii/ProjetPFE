@@ -14,4 +14,8 @@ class Echeance extends Model
         'nom', 'prenoms', 'numero_whatsapp', 'date_echeance',
         'numero_police', 'numeroclient', 'type_contrat'
     ];
+
+    function client(){
+        return $this->belongsTo(Client::class);
+    }
 }

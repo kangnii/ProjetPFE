@@ -176,7 +176,7 @@
                             position: 'bottom',
                             title: {
                                 display: true,
-                                text: 'Heures'
+                                text: 'Heures-Jours'
                             },
                             ticks: {
                                 autoSkip: true,
@@ -189,7 +189,7 @@
                             position: 'top',
                             title: {
                                 display: true,
-                                text: 'Jours'
+                                text: 'Heures-Jours'
                             },
                             ticks: {
                                 autoSkip: true,
