@@ -33,7 +33,6 @@
         @endcan
             </div>
 
-
         <!-- Tableau des messages -->
         <table class="table table-striped">
             <thead>
@@ -76,13 +75,9 @@
                 </button>
             </div>
         @endif
-
-
-
     </div>
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             // Données depuis le contrôleur Laravel
             const days = @json($messagesByDay).map(item => item.day);
@@ -128,7 +123,4 @@
             });
         });
     </script>
-
-
-
 @endsection

@@ -29,6 +29,20 @@ class EcheanceContoller extends Controller
         $request->validate([
             'file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
+
+        //Gestion de la mauvaise importation
+        $path = $request->file('file')->getRealPath();
+        $data = Excel::toArray((object)[], $path); // ou CSV reader si CSV
+
+        $rows = $data[0]; // première feuille
+        $headers = array_map('strtolower', array_map('trim', $rows[0])); // nettoyés
+
+        $expectedHeaders = ['nom', 'prenoms', 'numero_whatsapp', 'date_echeance', 'numero_police', 'numeroclient', 'type_contrat']; // ce qui est attendu
+
+        if (array_diff($expectedHeaders, $headers)) {
+            return back()->withErrors(['file' => 'Les en-têtes du fichier sont incorrectes.']);
+        }
+
         Excel::import(new EcheancesImport, $request->file('file'));
         return redirect()->route('echeance.index')->with('success', 'Données Excel Importées avec succès.');
 
