@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -24,7 +26,7 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
 
         if ($user) {
-            if ($user->password == 'CLEAN') {
+            if ($user->password === 'CLEAN') {
                 return response()->json(['exists' => true, 'cleanPassword' => true]);
             } else {
                 return response()->json(['exists' => true, 'cleanPassword' => false]);
@@ -37,8 +39,8 @@ class AuthController extends Controller
 
     public function LoginFormStore(Request $request)
     {
-        // Validation des données du formulaire
-        $credentials = $request->validate([
+        // Étape 1 : Validation de base
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ], [
@@ -48,38 +50,46 @@ class AuthController extends Controller
 
         $email = $request->input('email');
         $password = $request->input('password');
-        $confirm_password = $request->input('password_confirmation');
+        $confirmPassword = $request->input('password_confirmation');
+
+        // Étape 2 : Vérifier si l'utilisateur existe
         $user = User::where('email', $email)->first();
 
-        // Authentification de l'utilisateur
-        if (Auth::attempt($credentials)) {
-            // Authentification réussie
-
-            return redirect()->intended('/accueil');
-
-        } else if ($password == $confirm_password) {
-
-
-            if ($user->password == 'CLEAN') {
-                // Mettez à jour le mot de passe avec le nouveau mot de passe haché
-                $user->update([
-                    'password' => Hash::make($request->input('password'))
-                ]);
-
-                // Redirigez l'utilisateur vers le tableau de bord
-                return redirect()->intended('/accueil');
-
-            }
-        } else if ($password != $confirm_password) {
-            // Authentification échouée
-            return back()->withErrors(['message' => 'Les mots de passe ne correspondent pas']);
-
-        } else {
-
-            // Authentification échouée
-            return back()->withErrors(['message' => 'Email ou mot de passe incorrect.']);
+        if (!$user) {
+            return back()->withErrors(['message' => 'Aucun utilisateur trouvé avec cet email.']);
         }
+
+        // Étape 3 : Mot de passe temporaire "CLEAN"
+        if ($user->password === 'CLEAN') {
+
+            // Si le champ de confirmation est vide
+            if (!$confirmPassword) {
+                return back()->withErrors(['message' => 'Veuillez confirmer le mot de passe.']);
+            }
+
+            // Vérification de correspondance
+            if ($password !== $confirmPassword) {
+                return back()->withErrors(['message' => 'Les mots de passe ne correspondent pas.']);
+            }
+
+            // Mise à jour du mot de passe
+            $user->password = Hash::make($password);
+            $user->save();
+
+            // Connexion automatique
+            Auth::login($user);
+            return redirect()->intended('/accueil');
+        }
+
+        // Étape 4 : Tentative de connexion classique
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect()->intended('/accueil');
+        }
+
+        // Échec d'authentification
+        return back()->withErrors(['message' => 'Email ou mot de passe incorrect.']);
     }
+
 
     //end method
 
@@ -215,5 +225,50 @@ class AuthController extends Controller
         return redirect()->back()->with('status', "L'utilisateur a été " . ($user->is_active ? 'activé' : 'désactivé') . '.');
     }
 
+    public function showLinkRequestForm()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function showResetForm(Request $request, $token)
+    {
+        return view('auth.reset-password', ['token' => $token, 'email' => $request->email]);
+    }
+
+    public function reset(Request $request)
+    {
+        $request->validate([
+            'token'    => 'required',
+            'email'    => 'required|email',
+            'password' => 'required|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password),
+                    'remember_token' => Str::random(60),
+                ])->save();
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    }
 
 }

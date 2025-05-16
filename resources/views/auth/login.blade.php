@@ -10,7 +10,7 @@
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
+    <title>Login Page </title>
     <link rel="apple-touch-icon" href="{{ asset('backend/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('backend/images/ico/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
@@ -68,9 +68,9 @@
                             <h4 class="card-title mb-1">GESTION D'ECHEANCES: Connexion</h4>
                             <p class="card-text mb-2">Entrer vos identifiants pour vous connecter</p>
 
-                            @error('message')
-                            <div class="alert alert-danger show mb-2" role="alert">{{ $message }}</div>
-                            @enderror
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -98,10 +98,6 @@
                                 </div>
                                 <button class="btn btn-primary btn-block" tabindex="4">Connectez-vous</button>
                             </form>
-
-
-
-
                         </div>
                     </div>
                     <!-- /Login v1 -->
@@ -165,7 +161,7 @@
             dataType: 'json',
             success: function(response) {
                 if (response.exists) {
-                    var passwordFields;
+                    let passwordFields;
                     if (response.cleanPassword) {
                         passwordFields = `<div class="form-group">
                                     <div class="d-flex justify-content-between">
@@ -194,7 +190,7 @@
                         passwordFields = `<div class="form-group">
                                     <div class="d-flex justify-content-between">
                                         <label for="login-password">Mot de passe</label>
-                                        <a href="page-auth-forgot-password-v1.html">
+                                        <a href="{{ route('password.request') }}">
                                             <small>Mot de passe oublié ?</small>
                                         </a>
                                     </div>

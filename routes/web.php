@@ -13,6 +13,12 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/check-user', [AuthController::class, 'checkUser']);
 Route::post('/login/store', [AuthController::class, 'LoginFormStore'])->name('login.store');
 
+Route::get('forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('update/reset-password', [AuthController::class, 'reset'])->name('password.update.reset');
+
 Route::middleware(['auth', 'check.active'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('profil/photo', [AuthController::class, 'update_photo'])->name('profil.photo');

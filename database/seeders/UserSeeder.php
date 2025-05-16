@@ -24,6 +24,16 @@ class UserSeeder extends Seeder
 
         $admin->assignRole('admin');
 
+        $wisdom = User::updateOrCreate(
+            ['email' => 'wisdomfollygan@gmail.com'],  // Condition de recherche
+            [
+                'name' => 'Wisdom Follygan',
+                'password' => Hash::make('wisdom'),
+
+            ]);
+
+        $wisdom->assignRole('admin');
+
         $gestionnaire = User::updateOrCreate(
             ['email' => 'gestionnaire@gmail.com'],  // Condition de recherche
             [
