@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
 
         $admin->assignRole('admin');
 
+
         $wisdom = User::updateOrCreate(
             ['email' => 'wisdomfollygan@gmail.com'],  // Condition de recherche
             [

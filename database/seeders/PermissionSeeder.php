@@ -40,7 +40,10 @@ class PermissionSeeder extends Seeder
             ["name" => "Voir envois echoues", "description" => "Voir envois échoués"],
             ["name" =>"activer utilisateur", "description" => "activer utilisateur"],
             ["name" =>"desactiver utilisateur", "description" => "désactiver utilisateur"],
-            ["name" =>"Supprimer echec", "description" => "Supprimer échec"]
+            ["name" =>"Supprimer echec", "description" => "Supprimer échec"],
+            ["name" =>"Creer utilisateur", "description" => "Créer utilisateur"],
+            ["name" =>"Supprimer utilisateur", "description" => "Supprimer utilisateur"],
+            ["name" =>"Voir utilisateurs", "description" => "Voir utilisateurs"],
         ];
 
 

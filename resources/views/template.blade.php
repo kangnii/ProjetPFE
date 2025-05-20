@@ -133,7 +133,7 @@
               @can('Voir clients')
             <li class="menu-item  @yield('client_activation') mt-3">
               <a href="{{route('client.index')}}" class="menu-link ">
-                <i class="menu-icon tf-icons ti ti-user"></i>
+                <i class="menu-icon tf-icons ti ti-phone"></i>
                 <div data-i18n="Clients">Clients</div>
               </a>
             </li>
@@ -146,6 +146,17 @@
                   <a href="{{route('roles.index')}}" class="menu-link ">
                       <i class="menu-icon tf-icons ti ti-crown"></i>
                       <div data-i18n="Rôles">Rôles</div>
+                  </a>
+              </li>
+              @endcan
+
+              <!-- Utilisateurs -->
+              @can('Voir utilisateurs')
+              <!-- Rôles -->
+              <li class="menu-item  @yield('user_activation') mt-3">
+                  <a href="{{route('users.index')}}" class="menu-link">
+                      <i class="menu-icon tf-icons ti ti-user"></i>
+                      <div data-i18n="Utilisateurs">Utilisateurs</div>
                   </a>
               </li>
               @endcan

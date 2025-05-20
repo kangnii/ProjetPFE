@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EcheanceContoller;
 use App\Http\Controllers\NotificationController;
@@ -113,8 +114,21 @@ Route::middleware(['auth', 'check.active'])->group(function () {
         Route::delete('/echec/{id}/destroy', [NotificationController::class, 'failed_destroy'])->name('failed.destroy');
     });
 
-});
+    Route::group(['middleware' => ['permission:Voir utilisateurs']],function(){
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    });
 
+    Route::group(['middleware' => ['permission:Creer utilisateur']],function(){
+        Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+        Route::post('/users/add', [AdminUserController::class, 'store'])->name('users.store');
+
+    });
+
+    Route::group(['middleware' => ['permission:Supprimer utilisateur']],function(){
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    });
+
+});
 
 
 
