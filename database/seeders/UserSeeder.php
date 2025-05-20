@@ -34,23 +34,23 @@ class UserSeeder extends Seeder
 
         $wisdom->assignRole('admin');
 
-        $gestionnaire = User::updateOrCreate(
-            ['email' => 'gestionnaire@gmail.com'],  // Condition de recherche
-            [
-                'name' => 'Monsieur Gestionnaire',
-                'password' => Hash::make('gestionnaire'),
-            ]);
-
-        $gestionnaire->assignRole('gestionnaire');
-
-        $observateur = User::updateOrCreate(
-            ['email' => 'observateur@gmail.com'],  // Condition de recherche
-            [
-                'name' => 'Je Regarde Juste',
-                'password' => Hash::make('observateur'),
-            ]
-
-        );
-        $observateur->assignRole('observateur');
+//        $gestionnaire = User::updateOrCreate(
+//            ['email' => 'gestionnaire@gmail.com'],  // Condition de recherche
+//            [
+//                'name' => 'Monsieur Gestionnaire',
+//                'password' => Hash::make('gestionnaire'),
+//            ]);
+//
+//        $gestionnaire->assignRole('gestionnaire');
+//
+//        $observateur = User::updateOrCreate(
+//            ['email' => 'observateur@gmail.com'],  // Condition de recherche
+//            [
+//                'name' => 'Je Regarde Juste',
+//                'password' => Hash::make('observateur'),
+//            ]
+//
+//        );
+//        $observateur->assignRole('observateur');
     }
 }

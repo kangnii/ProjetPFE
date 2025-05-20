@@ -168,7 +168,7 @@
                         clearInterval(interval);
                     }
                     counter.textContent = current;
-                }, 200); // toutes les 200 ms
+                }, 150); // toutes les 100 ms
             });
         </script>
         <script>
@@ -185,7 +185,7 @@
                         clearInterval(interval);
                     }
                     counter.textContent = current;
-                }, 200); // toutes les 200 ms
+                }, 150); // toutes les 100 ms
             });
         </script>
         <script>
@@ -202,7 +202,7 @@
                         clearInterval(interval);
                     }
                     counter.textContent = current;
-                }, 200); // toutes les 200 ms
+                }, 150); // toutes les 200 ms
             });
         </script>
 @endsection

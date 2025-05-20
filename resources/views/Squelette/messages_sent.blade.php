@@ -48,15 +48,15 @@
                 <tr x-show="(expanded || {{ $index }} < {{ $maxVisible }}) &&
                          ('{{ strtolower($notification->body) }}'.includes(search.toLowerCase())) &&
                          (statusFilter === '' || '{{ $notification->status }}' === statusFilter) &&
-                         (!startDate || new Date('{{ $notification->created_at }}') >= new Date(startDate)) &&
-                         (!endDate || new Date('{{ $notification->created_at }}') <= new Date(endDate))">
+                         (!startDate || new Date('{{ \Carbon\Carbon::parse($notification->created_at)->addHour(1) }}') >= new Date(startDate)) &&
+                         (!endDate || new Date('{{ \Carbon\Carbon::parse($notification->created_at)->addHour(1) }}') <= new Date(endDate))">
                     <td>{{ $notification->body }}</td>
                     <td>
                         @if($notification->status == 'sent')
                             <span class="badge bg-success ">Livré</span>
                         @endif
                     </td>
-                    <td>{{ $notification->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($notification->created_at)->addHour(1)->format('d/m/Y H:i') }}</td>
                 </tr>
             @empty
                 <tr>

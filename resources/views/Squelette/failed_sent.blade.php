@@ -57,7 +57,7 @@
                             <span class="badge bg-danger">Échec</span>
                         @endif
                     </td>
-                    <td>{{ $notification->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($notification->created_at)->addHour(1)->format('d/m/Y H:i') }}</td>
                     <td><span class="badge bg-warning ">{{ $notification->phone == '22990830108'? 'Token expiré' : "numéro invalide"}}  </span></td>
                     <td>
                         <div class="d-flex flex-wrap gap-2">@if ($notification->phone == '22990830108')

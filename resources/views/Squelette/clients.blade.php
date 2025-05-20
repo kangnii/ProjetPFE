@@ -40,7 +40,7 @@
             </thead>
             <tbody>
 
-            @forelse($clients as $client)
+            @foreach($clients as $client)
                 <tr>
                 <td>{{$loop ->iteration}}</td>
                 <td>{{$client ->nom}}</td>
@@ -65,10 +65,8 @@
                         @endcan
 
                 </td>
-                </tr>
-            @empty
-                <tr ><td colspan="6">Aucun client ajouté.</td>.</tr>
-            @endforelse
+
+                @endforeach
 
             </tbody>
 

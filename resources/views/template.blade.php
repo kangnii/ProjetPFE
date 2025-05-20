@@ -14,7 +14,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Envoi d'échéances</title>
-      
+
 
       <meta name="description" content="" />
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -412,9 +412,10 @@
                 lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],
                 language: {
                     "lengthMenu": "Afficher _MENU_ éléments",
-                    "zeroRecords": "Aucun résultat trouvé",
+                    "zeroRecords": "Aucune échéance trouvée",
                     "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
-                    "infoEmpty": "Aucun élément à afficher",
+                    "infoEmpty": "Aucune échéance à afficher",
+                    "emptyTable": "Aucune échéance à venir",
                     "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
                     "search": "Rechercher :",
                     "paginate": {
@@ -440,7 +441,7 @@
                     "lengthMenu": "Afficher _MENU_ éléments",
                     "zeroRecords": "Aucun résultat trouvé",
                     "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
-                    "infoEmpty": "Aucun élément à afficher",
+                    "emptyTable": "Aucun client à afficher",
                     "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
                     "search": "Rechercher :",
                     "paginate": {

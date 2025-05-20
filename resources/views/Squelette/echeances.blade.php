@@ -103,7 +103,7 @@
             </tr>
             </thead>
             <tbody>
-            @forelse($echeances as $echeance)
+            @foreach($echeances as $echeance)
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$echeance->nom}}</td>
@@ -133,11 +133,8 @@
                         @endcan
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="9">Aucune échéance</td>
-                </tr>
-            @endforelse
+
+                @endforeach
             </tbody>
         </table>
 
