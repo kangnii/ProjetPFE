@@ -194,7 +194,7 @@ class AuthController extends Controller
     }
 
     public function gestion(){
-        $users = User::where('id', '!=', 26)->get();
+        $users = User::where('name','!=', 'admin')->get();
         return view('Squelette.gestion', compact('users'));
     }
 
@@ -209,7 +209,7 @@ class AuthController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $user->update(['password' => Hash::make($request->input('new_password'))]);
-            return redirect()->route('profil.gestion')->with('success','Mot de passe mis à jour avec succès');
+            return redirect()->route('profile')->with('success','Mot de passe mis à jour avec succès');
         }else{
             return back()->withErrors(['message' => 'Changement échoué. Le mot de passe de votre compte est incorrect']);
         }

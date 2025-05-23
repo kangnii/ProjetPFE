@@ -89,7 +89,6 @@
                             <h3 class="role-title mb-2">Ajouter nouveau rôle</h3>
                             <p class="text-muted">Gérer les permissions</p>
                             <form id="addRoleForm" class="row g-3"
-                                  onsubmit="return confirm('Voulez-vous vraiment créer ce rôle ?')"
                                   action="{{ route('roles.store') }}" method="POST">
                                 @csrf
                                 <div class="col-12 mb-4">

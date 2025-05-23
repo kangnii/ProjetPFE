@@ -218,7 +218,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="{{ route('profil.gestion') }}">
+                      <button disabled class="dropdown-item" style="font-weight: bold; color: #0C141C" >
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -227,11 +227,11 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block">{{ auth()->user()->name }}</span>
-                            <small class="text-muted"> {{ auth()->user()->getRoleNames()->first() }}
+                            <small class="text-muted ms-1"> {{ auth()->user()->getRoleNames()->first() }}
                             </small>
                           </div>
                         </div>
-                      </a>
+                      </button>
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>
@@ -389,6 +389,7 @@
     @stack('echeances')
     @stack('clients')
     @stack('roles')
+    @stack("users")
     <script>
         $(document).ready(function () {
             $('#usersTable').DataTable({
@@ -453,6 +454,33 @@
                     "zeroRecords": "Aucun résultat trouvé",
                     "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
                     "emptyTable": "Aucun client à afficher",
+                    "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
+                columnDefs: [
+                    { targets: "_all", className: "text-center align-middle" }
+                ]
+            });
+        } );
+    </script>
+
+    <script>
+        $(document).ready( function () {
+            $('#userTable').DataTable({
+                searching : true,
+                autoWidth: true,
+                lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "Tous"]],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "zeroRecords": "Aucun résultat trouvé",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
+                    "emptyTable": "Aucun utilisateur à afficher",
                     "infoFiltered": "(filtré depuis _MAX_ éléments au total)",
                     "search": "Rechercher :",
                     "paginate": {

@@ -77,45 +77,9 @@
                 </div>
             </form>
         </div>
-        <hr class="my-4"/>
-        @if(auth()->user()->can('activer utilisateur') && auth()->user()->can('desactiver utilisateur'))
-        <h4 class="mt-3 ">Gérer comptes</h4>
 
-        <table class="mt-3 table">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Statut</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>
-                        @if($user->is_active)
-                            <span class="badge bg-success">Actif</span>
-                        @else
-                            <span class="badge bg-danger">Inactif</span>
-                        @endif
-                    </td>
-                    <td>
-                        <form method="POST" action="{{ route('admin.users.toggle', $user->id) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button class="btn btn-sm {{ $user->is_active ? 'btn-danger' : 'btn-success' }}">
-                                {{ $user->is_active ? 'Désactiver' : 'Activer' }}
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        @endif
+
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

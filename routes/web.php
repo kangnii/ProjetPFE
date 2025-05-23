@@ -25,6 +25,11 @@ Route::middleware(['auth', 'check.active'])->group(function () {
     Route::post('profil/photo', [AuthController::class, 'update_photo'])->name('profil.photo');
     Route::post('/profil/photo/reset', [AuthController::class, 'resetPhoto'])->name('profil.photo.reset');
     Route::post('/profil/update', [AuthController::class, 'update_profil'])->name('profil.update');
+
+    Route::put('/users/{id}/update-role', [AdminUserController::class, 'updateRole'])->name('users.update-role');
+
+
+
     Route::get('/profil/gestion', [AuthController::class, 'gestion'])->name('profil.gestion');
     Route::post('/profil/gestion/password', [AuthController::class, 'password'])->name('password.update');
 

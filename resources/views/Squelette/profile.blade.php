@@ -34,10 +34,11 @@
             </div>
         </div>
         <hr class="my-4"/>
+
+        <h4 class="mt-3 fw-bold"><i class="ti ti-pencil"></i>Modifier vos informations personnelles</h4>
         <div class="card-body mt-3">
             <form id="formAccountSettings" action="{{ route('profil.update') }}" method="POST">
                 @csrf
-
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="name" class="form-label">Nom complet</label>
@@ -61,13 +62,103 @@
                         />
                     </div>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 mb-5">
                     <button type="submit" class="btn btn-success me-2">Enregistrer changements</button>
                     <button type="reset" class="btn btn-label-secondary">Annuler</button>
                 </div>
             </form>
         </div>
+
+        <hr class="my-4"/>
+
+        <h4 class="mt-5 fw-bold"><i class="ti ti-key"></i>Modifier mot de passe</h4>
+
+
+
+        <div class="card-body mt-3">
+            <form id="password" action="{{ route('password.update') }}" method="POST">
+                @csrf
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="password" class="form-label">Ancien mot de passe</label>
+                        <input
+                            class="form-control @error('password') is-invalid @enderror"
+                            type="password"
+                            id="password"
+                            name="password"
+                        />
+                        @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="new_password" class="form-label">Nouveau mot de passe</label>
+                        <div class="position-relative">
+
+                            <input
+                                class="form-control @error('new_password') is-invalid @enderror"
+                                type="password"
+                                id="new_password"
+                                name="new_password"
+                            />
+                            <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y me-2 toggle-password"
+                               style="cursor: pointer;"
+                            ></i>
+
+                            @error('new_password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="confirm_password" class="form-label">Confirmer mot de passe</label>
+                        <div class="position-relative">
+                            <input
+                                class="form-control @error('confirm_password') is-invalid @enderror"
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                            />
+                            <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y me-2 toggle-password"
+                               style="cursor: pointer;"
+                            ></i>
+                            @error('confirm_password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success me-2">Changer mot de passe</button>
+                    <button type="reset" class="btn btn-label-secondary">Annuler</button>
+                </div>
+            </form>
+        </div>
+
+
+
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+
+                    // Bascule le type de l'input
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+
+                    // Bascule l'icône
+                    this.classList.toggle('bi-eye');
+                    this.classList.toggle('bi-eye-slash');
+                });
+            });
+        });
+
+    </script>
     @push('photoscript')
         <script>
 
@@ -132,7 +223,7 @@
                             // Message de succès
                             iziToast.success({
                                 message: 'Photo mise à jour',
-                                position: 'bottomLeft',
+                                position: 'bottomRight',
                             });
                             // alert('Photo mise à jour avec succès !');
                         }
@@ -163,7 +254,7 @@
                             secondImage.src = '{{ asset('assets/img/avatars/pp.png') }}';
                             iziToast.success({
                                 message: 'Photo réinitialisée avec succès',
-                                position: 'bottomLeft',
+                                position: 'bottomRight',
                             });
 
                             // alert('Photo de profil réinitialisée');
