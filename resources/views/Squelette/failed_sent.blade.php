@@ -58,7 +58,7 @@
                         @endif
                     </td>
                     <td>{{ \Carbon\Carbon::parse($notification->created_at)->addHour(1)->format('d/m/Y H:i') }}</td>
-                    <td><span class="badge bg-warning ">{{ $notification->phone == '22990830108'? 'Token expiré' : "numéro invalide"}}  </span></td>
+                    <td><span class="badge bg-warning ">{{ $notification->phone == env('WHATSAPP_RECEPTION')? 'Token expiré' : "numéro invalide"}}  </span></td>
                     <td>
                         <div class="d-flex flex-wrap gap-2">@if ($notification->phone == '22990830108')
                         <form action={{ route('message.renvoi', ['id' => $notification->id]) }}
