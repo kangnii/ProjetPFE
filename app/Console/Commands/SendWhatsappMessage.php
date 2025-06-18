@@ -21,7 +21,7 @@ class SendWhatsappMessage extends Command
             7 => 'arrive dans 1 semaine le',
             3 => 'arrive dans 3 jours le',
             1 => 'arrive demain le',
-            0 => ' est arrivé à son terme ce'
+            0 => ' est arrivée ce'
         ];
 
         foreach ($delais as $joursAvant => $texte) {

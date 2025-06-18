@@ -159,7 +159,7 @@
                 const counter = document.getElementById('counter_messages_envoyes');
                 const finalValue = {{ count($success) }};
                 let current = 0;
-                const speed = Math.ceil(finalValue / 50); // ajuster la vitesse
+                const speed = Math.ceil(finalValue / 20); // ajuster la vitesse
 
                 const interval = setInterval(() => {
                     current += speed;
